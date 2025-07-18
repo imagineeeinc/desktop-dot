@@ -1,0 +1,321 @@
+@import "mocha.css"; 
+
+* {
+    font-family: "SpaceMono Nerd Font";
+    font-size: 16px;
+    min-height: 0;
+    font-weight: bold;
+    transition-duration: .2s;
+}
+
+window#waybar {
+    background: transparent;
+    /* background: @crust; */
+    color: @overlay0;
+    transition-property: background;
+    transition-duration: 0.1s;
+    /* border-top: 1px solid @overlay1; */
+}
+
+#window {
+    margin: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+button {
+    box-shadow: inset 0 -3px transparent;
+    border: none;
+    border-radius: 0;
+}
+
+#workspaces button {
+    margin-top: 10px;
+    padding: 0 4px;
+    border-top: 2px solid @mauve;
+    border-bottom: 2px solid @mauve;
+    background: @crust;
+}
+#workspaces button:first-child {
+    border-radius: 20px 0 0 20px;
+    border-left: 2px solid @mauve;
+    padding-left: 10px;
+}
+#workspaces button:last-child {
+    border-radius: 0 20px 20px 0;
+    border-right: 2px solid @mauve;
+    padding-right: 10px;
+}
+#workspaces button:only-child {
+    border-radius: 20px;
+    padding: 0 20px;
+    border: 2px solid @mauve;
+}
+#workspaces button:hover {
+    background: @surface0;
+    color: @teal;
+}
+#workspaces button.active {
+    background: @surface1;
+    color: @rosewater;
+}
+#workspaces button.active:hover {
+    background: @surface2;
+    color: @peach;
+}
+#workspaces button.urgent {
+    animation: strobe-red 2s infinite;
+}
+#workspaces button.urgent:hover {
+    animation: none;
+    background: @red;
+    color: @surface0;
+}
+
+@keyframes strobe-red {
+  0% {
+    background: rgba(0,0,0,0);
+  }
+  50% {
+    background: @red;
+  }
+  100% {
+    background: rgba(0,0,0,0);
+  }
+}
+
+#custom-music,
+#pulseaudio,
+#clock,
+#battery,
+#backlight,
+#wireplumber,
+#tray,
+#network,
+#mode,
+#scratchpad,
+#bluetooth,
+#custom-weather,
+#privacy {
+    background: @crust;
+    /* margin-top: 2px; */
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-left: 0px;
+    margin-right: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+#privacy {
+    margin-left: 15px;
+    border: 2px solid @lavender;
+}
+
+#custom-music {
+    margin-left: 5px;
+    color: @red;
+    border: 2px solid @red;
+}
+#custom-music.paused {
+    color: @peach;
+}
+#custom-music.disconnected {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+#clock {
+    color: @peach;
+    border: 2px solid @peach;
+}
+
+#clock.date {
+    color: @mauve;
+    border: 2px solid @mauve;
+}
+
+#bluetooth {
+    color: @sapphire;
+    border: 2px solid @sapphire;
+}
+#bluetooth.disabled {
+    color: @teal;
+    border: 2px solid @teal;
+}
+#bluetooth.connected {
+    color: @lavender;
+    border: 2px solid @lavender;
+}
+
+#pulseaudio {
+    color: @lavender;
+    border: 2px solid @lavender;
+}
+
+#network {
+    color: @yellow;
+    border: 2px solid @yellow;
+}
+
+#battery {
+    color: @flamingo;
+    border: 2px solid @flamingo;
+}
+#battery.warning {
+    /* color: @surface0; */
+    /* background: @peach; */
+    border: 2px solid @peach;
+}
+#battery.critical {
+    color: @surface0;
+    background: @red;
+    border: 2px solid @red;
+}
+#battery.charging {
+    background: @crust;
+    color: @teal;
+    border: 2px solid @teal;
+}
+#battery.plugged {
+    color: @green;
+    border: 2px solid @green;
+}
+
+#backlight {
+  color: @pink;
+  border: 2px solid @pink;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left>widget:first-child>#workspaces {
+    margin-left: 15px;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+/* .modules-right>widget:last-child>#workspaces { */
+/*     margin-right: 0; */
+/* } */
+
+#custom-vpn {
+    color: @lavender;
+    border-radius: 15px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+#tray {
+  border: 2px solid @rosewater;
+}
+
+#cpu,
+#memory,
+#temperature {
+    background: @crust;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-right: 15px;
+    border-top: 2px solid @lavender;
+    border-bottom: 2px solid @lavender;
+}
+#temperature {
+    padding-left: 10px;
+    border-radius: 20px 0 0 20px;
+    border-left: 2px solid @lavender;
+}
+#memory {
+    padding-right: 10px;
+    border-radius: 0 20px 20px 0;
+    margin-right: 5px;
+    border-right: 2px solid @lavender;
+}
+
+#idle_inhibitor {
+    color: @green;
+    padding-left: 6px;
+    padding-right: 14px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-right: 5px;
+    border-radius: 20px;
+    background: @base;
+    border: 2px solid @mantle;
+}
+#idle_inhibitor.activated {
+    color: @red;
+}
+
+#power-profiles-daemon {
+    padding-left: 6px;
+    padding-right: 14px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-right: 5px;
+    border-radius: 20px;
+    background: @base;
+    border: 2px solid @mantle;
+}
+#power-profiles-daemon.power-saver {
+  color: @green;
+}
+#power-profiles-daemon.balanced {
+  color: @blue;
+}
+#power-profiles-daemon.performance {
+  color: @red;
+}
+
+#custom-power {
+    margin-top: 10px;
+    margin-right: 15px;
+    padding-left: 8px;
+    padding-right: 12px;
+    color: @lavender;
+    border: 2px solid @lavender;
+    border-radius: 20px;
+    background: @crust;
+}
+#custom-power:hover {
+    color: @crust;
+    background: @red;
+    border: 2px solid @peach;
+}
+#custom-lock,
+#custom-quit,
+#custom-reboot,
+#custom-sleep {
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-right: 5px;
+    padding: 3px 10px;
+    color: @lavender;
+    background: @base;
+    border: 2px solid @mantle;
+    border-radius: 20px;
+}
+
+#custom-quit:hover {
+    color: @crust;
+    background: @maroon;
+}
+#custom-reboot:hover {
+    color: @crust;
+    background: @peach;
+}
+#custom-lock:hover {
+    color: @crust;
+    background: @teal;
+}
+#custom-sleep:hover {
+    color: @crust;
+    background: @blue;
+}
+
+#idle_inhibitor:hover,
+#power-profiles-daemon:hover {
+    background: @surface1;
+}
+
+#custom-weather {
+  color: @green;
+  border: 2px solid @green;
+}

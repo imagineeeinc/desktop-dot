@@ -1,0 +1,339 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 0, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "privacy",
+        "hyprland/workspaces"
+    ],
+    // "modules-center": [
+    //     "hyprland/window"
+    // ],
+    "modules-right": [
+        "custom/music",
+        "temperature",
+        "cpu",
+        "memory",
+        "tray",
+        "pulseaudio",
+        "backlight",
+        "group/network-group",
+        "custom/weather",
+        "clock",
+        "battery",
+        "group/power"
+    ],
+    // Modules configuration
+    "privacy": {
+        "icon-size": 16,
+        "icon-spacing": 10,
+        "transition-duration": 500,
+        "modules": [
+          {
+            "type": "screenshare",
+            "tooltip": true,
+            "tooltip-icon-size": 16
+          },
+          {
+            "type": "audio-in",
+            "tooltip": true,
+            "tooltip-icon-size": 16
+          }
+        ],
+        "ignore-monitor": true,
+        "ignore": [
+          {
+            "type": "audio-in",
+            "name": "cava"
+          }
+        ]
+    },
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{name}",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        }
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "hyprland/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "hyprland/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "mpd": {
+        "format": "{stateIcon} {artist} - {title}", //  {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}
+        "format-disconnected": "",
+        "format-stopped": "",
+        "unknown-tag": "N/A",
+        "interval": 5,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "on": " "
+        },
+        "repeat-icons": {
+            "off": "󰑗",
+            "on": "󰑖 "
+        },
+        "single-icons": {
+            "on": "󰑘 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "{title} - {artist} ({album})\n(  {elapsedTime:%M:%S}/{totalTime:%M:%S}) (󰐑  {songPosition}/{queueLength}) (   {volume}%)  {randomIcon}{repeatIcon}{singleIcon}",
+        "tooltip-format-disconnected": "MPD (disconnected)",
+        "on-click": "mpc toggle",
+        "on-click-right": "mpc next",
+        "on-click-middle": "mpc prev",
+        "on-scroll-up": "mpc volume +1",
+        "on-scroll-down": "mpc volume -1",
+        "reverse-scrolling": true
+    },
+    "bluetooth": {
+        "on-click": "blueman-manager",
+        "format": "",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
+        "format-connected-battery": "󰂱 {device_battery_percentage}%"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip-format-activated": "Idle inhibitor (activated)",
+        "tooltip-format-deactivated": "Idle inhibitor (disabled)"
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+        // "icons": {
+          // "blueman": "bluetooth"
+        // }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "format": "{:%a %d/%m %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%d/%m/%Y}"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false
+    },
+    "memory": {
+        "format": " {}%"
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{icon} {temperatureC}°C",
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "scroll-step": 2,
+        "reverse-scrolling": true,
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "{time}"
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} ({essid}) via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "⚠ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "scroll-step": 1, // %, can be a float
+        "reverse-scrolling": true,
+        "format": "{icon} {volume}%", // {format_source}
+        "format-bluetooth": "{icon} {volume}%", // {format_source} 
+        "format-bluetooth-muted": "{icon} ", // {format_source} 
+        "format-muted": "", // {format_source}
+        "format-source": "",// {volume}% 
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/media": {
+        "format": "{icon} {text}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    // "custom/power": {
+    //     "format" : "⏻ ",
+    //     "tooltip": false,
+    //     "menu": "on-click",
+    //     "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+    //     "menu-actions": {
+    //       "shutdown": "shutdown",
+    //       "reboot": "reboot",
+    //       "suspend": "systemctl suspend",
+    //       "hibernate": "systemctl hibernate"
+    //     }
+    // },
+     "group/usage": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "custom/power",
+            "idle_inhibitor",
+            "power-profiles-daemon",
+            "custom/quit",
+            "custom/lock",
+            "custom/sleep",
+            "custom/reboot"
+        ]
+    },
+    "group/network-group": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "network",
+            "bluetooth"
+        ]
+    },
+    "group/power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "custom/power",
+            "idle_inhibitor",
+            "power-profiles-daemon",
+            "custom/quit",
+            "custom/lock",
+            "custom/sleep",
+            "custom/reboot"
+        ]
+    },
+    "custom/quit": {
+        "format": "󰗼",
+        "tooltip-format": "Exit Hyprland",
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/sleep": {
+        "format": "󰤄",
+        "tooltip-format": "Sleep",
+        "on-click": "loginctl lock-session; systemctl suspend"
+    },
+    "custom/lock": {
+        "format": "󰍁",
+        "tooltip-format": "Lock",
+        "on-click": "loginctl lock-session"
+    },
+    "custom/reboot": {
+        "format": "󰜉",
+        "tooltip-format": "Reboot",
+        "on-click": "reboot"
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip-format": "Shutdown",
+        "on-click": "shutdown now"
+    },
+    "custom/weather": {
+        "format": "{}°",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "wttrbar --nerd --ampm --hide-conditions --date-format %d/%m/%Y --location london",
+        "return-type": "json"
+    },
+    "custom/music": {
+        "format": "{}",
+        // "tooltip": true,
+        "interval": 2,
+        "exec": "~/.local/bin/player_waybar --player=Supersonic",
+        "tooltip": false,
+        "on-click": "sleep 0.1 && /bin/playerctl -p Supersonic play-pause",
+        "on-click-right": "sleep 0.1 && /bin/playerctl -p Supersonic next",
+        "on-click-middle": "sleep 0.1 && /bin/playerctl -p Supersonic previous",
+        "return-type": "json"
+    }
+}
