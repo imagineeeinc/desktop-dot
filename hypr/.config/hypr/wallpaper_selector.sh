@@ -4,7 +4,7 @@ WALLPAPER_DIR="$HOME/Pictures/wallpaper"
 
 WALLPAPER=$(ls $WALLPAPER_DIR | grep '.png\|.jpg' | wofi -i --dmenu)
 
-if [[ -z "$var" ]]; then
+if [[ -z "$WALLPAPER" ]]; then
   echo "Not selected wallpaper"
 else
   hyprctl hyprpaper reload ,"$WALLPAPER_DIR/$WALLPAPER"
