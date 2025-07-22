@@ -85,6 +85,7 @@ button {
 }
 
 #custom-music,
+#custom-cava,
 #pulseaudio,
 #clock,
 #battery,
@@ -117,10 +118,30 @@ button {
     color: @red;
     border: 2px solid @red;
 }
-#custom-music.paused {
+#custom-music.paused,
+#custom-cava.Paused {
     color: @peach;
 }
 #custom-music.disconnected {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#custom-cava {
+    border: 2px solid @maroon;
+    color: @text;
+}
+#custom-cava.Playing {
+    color: @base;
+    text-shadow: 0 1px 2px @crust;
+    background: @maroon;
+}
+#custom-cava.Playing:hover {
+    border: 2px solid transparent;
+    color: @maroon;
+}
+#custom-cava.Stopped {
     margin: 0;
     padding: 0;
     border: none;
@@ -169,6 +190,7 @@ button {
 }
 #battery.critical {
     color: @surface0;
+    text-shadow: 0 1px 2px @crust;
     background: @red;
     border: 2px solid @red;
 }
@@ -278,6 +300,7 @@ button {
     color: @crust;
     background: @red;
     border: 2px solid @peach;
+    text-shadow: 0 1px 2px @crust;
 }
 #custom-lock,
 #custom-quit,
@@ -296,18 +319,22 @@ button {
 #custom-quit:hover {
     color: @crust;
     background: @maroon;
+    text-shadow: 0 1px 2px @crust;
 }
 #custom-reboot:hover {
     color: @crust;
     background: @peach;
+    text-shadow: 0 1px 2px @crust;
 }
 #custom-lock:hover {
     color: @crust;
     background: @teal;
+    text-shadow: 0 1px 2px @crust;
 }
 #custom-sleep:hover {
     color: @crust;
     background: @blue;
+    text-shadow: 0 1px 2px @crust;
 }
 
 #idle_inhibitor:hover,

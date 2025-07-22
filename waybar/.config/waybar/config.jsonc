@@ -14,7 +14,7 @@
     //     "hyprland/window"
     // ],
     "modules-right": [
-        "custom/music",
+        "custom/cava",
         "temperature",
         "cpu",
         "memory",
@@ -329,11 +329,26 @@
         "format": "{}",
         // "tooltip": true,
         "interval": 2,
-        "exec": "~/.local/bin/player_waybar --player=Supersonic",
+        "exec": "~/.local/bin/player_waybar --player=Supersonic --maxTitleLenght=20",
         "tooltip": false,
         "on-click": "sleep 0.1 && /bin/playerctl -p Supersonic play-pause",
         "on-click-right": "sleep 0.1 && /bin/playerctl -p Supersonic next",
         "on-click-middle": "sleep 0.1 && /bin/playerctl -p Supersonic previous",
         "return-type": "json"
-    }
+    },
+    "custom/cava": {
+      "format": "{text}",
+      "format-icons": {
+          // "Playing": " ", // Uncomment if not using caway
+          "Paused": " ",
+          "Stopped": " "
+      },
+      "escape": false,
+      "tooltip": true,
+      "exec": "~/.config/waybar/caway -b 16 -p Supersonic",
+      "return-type": "json",
+      "on-click": "playerctl play-pause",
+      "on-click-right": "playerctl next",
+      "on-click-middle": "playerctl previous"
+  }
 }
