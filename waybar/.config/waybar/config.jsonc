@@ -22,8 +22,8 @@
         "pulseaudio",
         "backlight",
         "group/network-group",
-        "custom/weather",
-        "clock",
+        // "custom/weather",
+        "group/time",
         "battery",
         "group/power"
     ],
@@ -224,17 +224,6 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
     // "custom/power": {
     //     "format" : "⏻ ",
     //     "tooltip": false,
@@ -251,7 +240,6 @@
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
-            "children-class": "not-power",
             "transition-left-to-right": false,
         },
         "modules": [
@@ -268,12 +256,22 @@
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
-            "children-class": "not-power",
             "transition-left-to-right": false,
         },
         "modules": [
             "network",
             "bluetooth"
+        ]
+    },
+    "group/time": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "clock",
+            "custom/weather"
         ]
     },
     "group/power": {

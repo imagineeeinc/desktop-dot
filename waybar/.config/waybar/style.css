@@ -150,6 +150,10 @@ button {
     color: @peach;
     border: 2px solid @peach;
 }
+#clock:hover {
+    border-radius: 0 20px 20px 0;
+    border-left: none;
+}
 
 #clock.date {
     color: @mauve;
@@ -343,6 +347,16 @@ button {
 }
 
 #custom-weather {
-  color: @green;
-  border: 2px solid @green;
+    color: @peach;
+    border: 2px solid @peach;
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    margin-right: 0;
+}
+#custom-weather:hover {
+    background: @surface0;
+    color: @green;
+    border: 2px solid @green;
+    border-radius: 20px;
+    margin-right: 5px;
 }
