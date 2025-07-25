@@ -17,6 +17,7 @@ Specially designed for my laptop.
 - [Blueman applet](https://github.com/blueman-project/blueman) - Bluetooth manager gui. (Package manager)
 - [Network Manager](https://gitlab.freedesktop.org/NetworkManager/NetworkManager) - Network manager gui. (Package manager)
 - [Hyprshot](https://github.com/Gustash/hyprshot) - screenshot tool (Copy the script)
+- [Emote](https://github.com/tom-james-watson/Emote) - Emoji picker (Flathub)
 
 # Extra Hypr Ecosystem
 
