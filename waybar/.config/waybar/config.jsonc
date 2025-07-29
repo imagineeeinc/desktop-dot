@@ -343,7 +343,7 @@
       },
       "escape": false,
       "tooltip": true,
-      "exec": "~/.config/waybar/caway -b 16 -p Supersonic",
+      "exec": "~/.config/waybar/caway -b 16 -p Feishin",
       "return-type": "json",
       "on-click": "playerctl play-pause",
       "on-click-right": "playerctl next",
