@@ -1,5 +1,7 @@
 # Desktop Dotfiles
 
+![Desktop with fastfetch](./screenshots/screenshot2.png)
+
 Includes dotfiles for my linux **desktop** setup.
 Specially designed for my laptop.
 
@@ -19,7 +21,7 @@ Specially designed for my laptop.
 - [Hyprshot](https://github.com/Gustash/hyprshot) - screenshot tool (Copy the script)
 - [Emote](https://github.com/tom-james-watson/Emote) - Emoji picker (Flathub)
 
-# Extra Hypr Ecosystem
+## Extra Hypr Ecosystem
 
 - Hypridle
 - Hyprlock
@@ -27,3 +29,28 @@ Specially designed for my laptop.
 - Hyprpolkitagent
 - Hyprshot
 
+## Installing
+
+Use gnu stow.
+
+## Gallery
+
+**Empty**
+
+![Desktop with fastfetch](./screenshots/screenshot1.png)
+
+**Floating window**
+
+![Desktop with fastfetch](./screenshots/screenshot2.png)
+
+**Wallpaper selector**
+
+![Desktop with fastfetch](./screenshots/screenshot3.png)
+
+**Display resolution selector**
+
+![Desktop with fastfetch](./screenshots/screenshot4.png)
+
+**A notification**
+
+![Desktop with fastfetch](./screenshots/screenshot5.png)
