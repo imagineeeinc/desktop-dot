@@ -5,6 +5,8 @@
 Includes dotfiles for my linux **desktop** setup.
 Specially designed for my laptop.
 
+[Preview Video](https://clip.place/w/u6H9x3KmbpRfyhqGLgv9Jb)
+
 # Main software
 
 - [Hyprland](https://hypr.land) - Tiling window manager. [[Install](https://wiki.hypr.land/Getting-Started/Installation/)] (**KDE Plasma 6** as secondary DE)
