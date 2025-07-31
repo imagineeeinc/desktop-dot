@@ -22,6 +22,7 @@ Specially designed for my laptop.
 - [Network Manager](https://gitlab.freedesktop.org/NetworkManager/NetworkManager) - Network manager gui. (Package manager)
 - [Hyprshot](https://github.com/Gustash/hyprshot) - screenshot tool (Copy the script)
 - [Emote](https://github.com/tom-james-watson/Emote) - Emoji picker (Flathub)
+- [Rosepine cursor](https://github.com/rose-pine/cursor) - Cursor theme (Manual install)
 
 ## Extra Hypr Ecosystem
 
