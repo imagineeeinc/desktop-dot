@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-op=$( echo -e "Screen1\nMirror\nExtend Above\nExtend Right\nExtend Left\nScreen2" | wofi -i --dmenu )
+if [ $# -eq 0 ]; then
+  op=$( echo -e "Screen1\nMirror\nExtend Above\nExtend Right\nExtend Left\nScreen2" | wofi -i --dmenu )
+else
+  op=$1
+fi
 
 case $op in
   Screen1)
