@@ -24,7 +24,7 @@
         "group/network-group",
         // "custom/weather",
         "group/time",
-        "battery",
+        "group/battery-group",
         "group/power"
     ],
     // Modules configuration
@@ -267,11 +267,24 @@
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 300,
-            "transition-left-to-right": false,
+            "transition-left-to-right": false
         },
         "modules": [
             "clock",
             "custom/weather"
+        ]
+    },
+    "group/battery-group": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 300,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "battery",
+            "idle_inhibitor",
+            "power-profiles-daemon"
+
         ]
     },
     "group/power": {
@@ -279,12 +292,10 @@
         "drawer": {
             "transition-duration": 500,
             "children-class": "not-power",
-            "transition-left-to-right": false,
+            "transition-left-to-right": false
         },
         "modules": [
             "custom/power",
-            "idle_inhibitor",
-            "power-profiles-daemon",
             "custom/quit",
             "custom/lock",
             "custom/sleep",
@@ -343,7 +354,7 @@
       },
       "escape": false,
       "tooltip": true,
-      "exec": "~/.config/waybar/caway -b 16 -p Feishin",
+      "exec": "~/.config/waybar/caway -b 16 -p Supersonic",
       "return-type": "json",
       "on-click": "playerctl play-pause",
       "on-click-right": "playerctl next",
