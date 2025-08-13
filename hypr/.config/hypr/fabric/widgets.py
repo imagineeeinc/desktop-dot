@@ -7,15 +7,15 @@ from fabric.widgets.label import Label
 from fabric.widgets.button import Button
 from fabric.widgets.entry import Entry
 from fabric.widgets.circularprogressbar import CircularProgressBar
-from fabric.widgets.eventbox import EventBox
+from fabric.widgets.scrolledwindow import ScrolledWindow
 from fabric.widgets.wayland import WaylandWindow as Window
 
-import os, subprocess, json, copy
+import os, subprocess, json, yaml
 from pathlib import Path
 from functools import partial
 
 monitors = json.loads(subprocess.run(["/usr/bin/hyprctl", "monitors", "-j"], stdout=subprocess.PIPE).stdout.decode("utf-8"))
-
+monitor_conf = {}
 class Monitor(Window):
     def __init__(self, **kwargs):
         super().__init__(
@@ -71,26 +71,55 @@ class Resolution(Window):
             title="Resolution Settings",
             name="resolution-settings",
             layer="top",
-            anchor="center",
+            anchor="top right",
+            margin="25px 25px 0px 0px",
             exclusivity="none",
             keyboard_mode="on-demand",
         )
-        # TODO: Add per monitor setting
         self.connect("key-press-event", self._on_key_press)
         self.input_box = Entry(placeholder="Resolution")
+        self.selected=0
+        self.list=Box(
+            orientation="h",
+            spacing=5
+        )
+        self.res_list=Box(
+            orientation="v",
+            spacing=10
+        )
+        self.search_term = ""
         self.add(
            Box(
                 name="main-box",
-                orientation="v",
-                spacing=10,
+                orientation="h",
+                spacing=20,
                 children=[
-                    Label("Monitor Resolution Settings"),
-                    self.input_box,
-                    Button(label="Standard",   on_clicked=lambda: self._handle_press("Standard")),
-                    Button(label="1920x1080",  on_clicked=lambda: self._handle_press("1920x1080"))
+                    Box(
+                        orientation="v",
+                        spacing=10,
+                        children=[
+                            Label("Monitor Resolution Settings"),
+                            self.list,
+                            self.input_box,
+                            ScrolledWindow(
+                                min_content_size=[250, 300],
+                                h_scrollbar_policty="never",
+                                v_expand=True,
+                                child=self.res_list
+                            )
+                        ]
+                    ),
+                    Button(
+                        label="",
+                        style_classes=["close-btn", "font-large", "font-lavender"],
+                        on_clicked=lambda: self.hide(),
+                    )
+                    # Button(label="Standard",   on_clicked=lambda: self._handle_press("Standard")),
+                    # Button(label="1920x1080",  on_clicked=lambda: self._handle_press("1920x1080"))
                 ]
             )
         )
+        self.update_list()
         self.hide()
     def _on_key_press(self, _, event):
         if event.keyval == Gdk.KEY_Escape:
@@ -98,10 +127,41 @@ class Resolution(Window):
         elif event.keyval == Gdk.KEY_Return:
             if type(self.get_focus()).__name__ == "Entry":
                 value = self.input_box.get_text()
-                os.system(f'/bin/bash ../resolution_selector.sh "{value}"')
+                self._handle_press(value, monitors[self.selected]["name"])
                 self.hide()
-    def _handle_press(self, item):
-        os.system(f'/bin/bash ../resolution_selector.sh "{item}"')
+        else:
+            self.search_term = self.input_box.get_text()
+            self.update_list()
+    def update_list(self):
+        self.list.children = []
+        for index, monitor in enumerate(monitors):
+            classes = ["font-medium"]
+            if index == self.selected:
+                classes.append("selected")
+                self.res_list.children = []
+                for res in monitor["availableModes"]:
+                    if len(self.search_term) == 0 or self.search_term in res:
+                        self.res_list.add(
+                            Button(label=res, on_clicked=partial(self._handle_press, res, monitor["name"]))
+                        )
+            self.list.add(
+                Button(
+                    label=monitor["name"],
+                    style_classes=classes,
+                    h_exapnd=True,
+                    on_clicked=partial(self._set_selected, index)
+                )
+            )
+    def _set_selected(self, i):
+        self.selected = i
+    def _handle_press(self, res, monitor):
+        monitor_c = [m for m in monitor_conf["monitors"] if m["name"] == monitor]
+        scale = monitors[self.selected]["scale"]
+        if len(monitor_c):
+            scale_c = [r["scale"] for r in monitor_c[0]["resolutions"] if res in r["name"]]
+            if len(scale_c) > 0:
+                scale = scale_c[0] or 1
+        os.system(f'/bin/bash ../resolution_selector.sh "{res}" "{monitor}" "{str(scale)}" "{monitors[self.selected]["x"]}x{monitors[self.selected]["y"]}"')
         self.hide()
 
 class Brightness(Window):
@@ -123,11 +183,22 @@ class Brightness(Window):
         self.add(
            Box(
                 name="main-box",
-                orientation="v",
+                orientation="h",
                 spacing=20,
                 children=[
-                    Label("Monitor Brightness"),
-                    self.list
+                    Box(
+                        orientation="v",
+                        spacing=20,
+                        children=[
+                            Label("Monitor Brightness"),
+                            self.list
+                        ]
+                    ),
+                    Button(
+                        label="",
+                        style_classes=["close-btn", "font-large", "font-lavender"],
+                        on_clicked=lambda: self.hide(),
+                    )
                 ]
             )
         )
@@ -148,9 +219,9 @@ class Brightness(Window):
             self.list.add(
                 Box(
                     orientation="v",
-                    spacing=5,
+                    spacing=10,
                     children=[
-                        Label(f"{monitor["name"]}"),
+                        Label(monitor["name"]),
                         CircularProgressBar(
                             value=float(brightness),
                             min_value=0.0,
@@ -163,8 +234,8 @@ class Brightness(Window):
                             orientation="h",
                             spacing=10,
                             children=[
-                                Button(label="+", on_clicked=partial(self._handle_brightness, "+", f"{monitor["name"]}", index)),
-                                Button(label="-", on_clicked=partial(self._handle_brightness, "-", f"{monitor["name"]}", index))
+                                Button(label="+", on_clicked=partial(self._handle_brightness, "+", monitor["name"], index)),
+                                Button(label="-", on_clicked=partial(self._handle_brightness, "-", monitor["name"], index))
                             ]
                         )
                     ]
@@ -195,19 +266,23 @@ if __name__ == "__main__":
     monitor_brightness = Brightness()
     def on_monitors_changed(f, v):
         global monitors
+        global monitor_conf
         monitors = json.loads(v.strip())
         monitor_brightness.update_list()
+        with open(os.path.dirname(os.path.realpath(__file__))+"/config.yml") as f:
+            monitor_conf = yaml.safe_load(f)
+        monitor_resolution.update_list()
 
     monitors_fabricator = Fabricator(
         interval=1000*5,
         poll_from=lambda f: subprocess.run(["/usr/bin/hyprctl", "monitors", "-j"], stdout=subprocess.PIPE).stdout.decode("utf-8"),
         on_changed=on_monitors_changed
-    )
+    )hyprctl --batch "keyword monitor ${2:-eDP-1},preferred,0x0,1.0666667,bitdepth,16,cm,auto"
 
     app = Application("Widgets")
     app.add_window(monitor_settings)
     app.add_window(monitor_resolution)
     app.add_window(monitor_brightness)
 
-    app.set_stylesheet_from_file("./style.css")
+    app.set_stylesheet_from_file(os.path.dirname(os.path.realpath(__file__))+"/style.css")
     app.run()

@@ -36,3 +36,22 @@ window {
   color: @surface0;
   border: @lavender;
 }
+.close-btn {
+  background: @mantle;
+}
+.selected {
+  background: @blue;
+  color: @crust;
+}
+.font-xlarge {
+  font-size: 50px;
+}
+.font-large {
+  font-size: 35px;
+}
+.font-medium {
+  font-size: 20px;
+}
+.font-lavender {
+  color: @lavender;
+}
