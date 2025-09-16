@@ -62,7 +62,7 @@ class Monitor(Window):
         if event.keyval == Gdk.KEY_Escape:
             self.hide()
     def _monitor_switch(self, item):
-        os.system(f'/bin/bash ../display_mode.sh "{item}"')
+        os.system(f'/bin/bash ~/.config/hypr/display_mode.sh "{item}"')
         self.hide()
 
 class Resolution(Window):
@@ -161,7 +161,7 @@ class Resolution(Window):
             scale_c = [r["scale"] for r in monitor_c[0]["resolutions"] if res in r["name"]]
             if len(scale_c) > 0:
                 scale = scale_c[0] or 1
-        os.system(f'/bin/bash ../resolution_selector.sh "{res}" "{monitor}" "{str(scale)}" "{monitors[self.selected]["x"]}x{monitors[self.selected]["y"]}"')
+        os.system(f'/bin/bash ~/.config/hypr/resolution_selector.sh "{res}" "{monitor}" "{str(scale)}" "{monitors[self.selected]["x"]}x{monitors[self.selected]["y"]}"')
         self.hide()
 
 class Brightness(Window):
@@ -277,7 +277,7 @@ if __name__ == "__main__":
         interval=1000*5,
         poll_from=lambda f: subprocess.run(["/usr/bin/hyprctl", "monitors", "-j"], stdout=subprocess.PIPE).stdout.decode("utf-8"),
         on_changed=on_monitors_changed
-    )hyprctl --batch "keyword monitor ${2:-eDP-1},preferred,0x0,1.0666667,bitdepth,16,cm,auto"
+    )
 
     app = Application("Widgets")
     app.add_window(monitor_settings)
