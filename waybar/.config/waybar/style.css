@@ -31,7 +31,7 @@ button {
 
 #workspaces button {
     margin-top: 10px;
-    padding: 0 4px;
+    padding: 0 8px 0 2px;
     border-top: 2px solid @mauve;
     border-bottom: 2px solid @mauve;
     background: @crust;
@@ -39,7 +39,7 @@ button {
 #workspaces button:first-child {
     border-radius: 20px 0 0 20px;
     border-left: 2px solid @mauve;
-    padding-left: 10px;
+    padding-left: 6px;
 }
 #workspaces button:last-child {
     border-radius: 0 20px 20px 0;
@@ -48,7 +48,7 @@ button {
 }
 #workspaces button:only-child {
     border-radius: 20px;
-    padding: 0 20px;
+    padding: 0 20px 0 14px;
     border: 2px solid @mauve;
 }
 #workspaces button:hover {

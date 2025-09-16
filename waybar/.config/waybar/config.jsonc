@@ -56,11 +56,24 @@
         "disable-scroll": true,
         "all-outputs": true,
         "warp-on-scroll": false,
-        "format": "{name}",
+        "format": "{icon}",
+        "persistent-workspaces": {
+            "*": 1
+        },
         "format-icons": {
-            "urgent": "",
-            "active": "",
-            "default": ""
+            // "1": "一",
+            // "2": "二",
+            // "3": "三",
+            // "4": "四",
+            // "5": "五",
+            // "6": "六",
+            // "7": "七",
+            // "8": "八",
+            // "9": "九",
+            // "10": "十",
+            "default": "",
+            "active": "",
+            "urgent": ""
         }
     },
     "keyboard-state": {
@@ -161,6 +174,7 @@
     "backlight": {
         // "device": "acpi_video1",
         "scroll-step": 2,
+        "on-click": "python -m fabric execute Widgets \"monitor_brightness.show()\" -j",
         "reverse-scrolling": true,
         "format": "{icon} {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
@@ -240,7 +254,7 @@
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
-            "transition-left-to-right": false,
+            "transition-left-to-right": false
         },
         "modules": [
             "custom/power",
@@ -256,7 +270,7 @@
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
-            "transition-left-to-right": false,
+            "transition-left-to-right": false
         },
         "modules": [
             "network",
