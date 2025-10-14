@@ -13,6 +13,7 @@ Specially designed for my laptop.
 - [Waybar](https://github.com/Alexays/Waybar) - status bar. [[Install](https://github.com/Alexays/Waybar/wiki/Installation)]
 - [Dunst](https://dunst-project.org) *or* [Swaync](https://github.com/ErikReider/SwayNotificationCenter) - Notification daemon to receive notifications. Two of them as SwayNC dosen't work right now, thus dunst. [[Install dunst](https://github.com/dunst-project/dunst?tab=readme-ov-file#installation) | [Install Swaync](https://github.com/ErikReider/SwayNotificationCenter?tab=readme-ov-file#install)]
 - [Kitty](https://sw.kovidgoyal.net/kitty/) - Terminal, simple as that. Might change it. [Install from package manager]
+- [wlogout](https://github.com/ArtsyMacaw/wlogout/) - logout menu. [Install](https://github.com/ArtsyMacaw/wlogout/tree/master?tab=readme-ov-file#install)
 
 ## Extra required software
 
