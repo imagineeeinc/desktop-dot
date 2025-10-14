@@ -339,7 +339,7 @@
     "custom/power": {
         "format": "",
         "tooltip-format": "Shutdown",
-        "on-click": "shutdown now"
+        "on-click": "wlogout"
     },
     "custom/weather": {
         "format": "{}°",
