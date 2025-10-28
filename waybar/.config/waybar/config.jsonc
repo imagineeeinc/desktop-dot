@@ -313,7 +313,7 @@
             "custom/quit",
             "custom/lock",
             "custom/sleep",
-            "custom/reboot"
+            // "custom/reboot"
         ]
     },
     "custom/quit": {
@@ -338,7 +338,7 @@
     },
     "custom/power": {
         "format": "",
-        "tooltip-format": "Shutdown",
+        "tooltip-format": "Power Menu",
         "on-click": "wlogout"
     },
     "custom/weather": {
