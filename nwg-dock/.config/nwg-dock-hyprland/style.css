@@ -1,0 +1,39 @@
+@import "mocha.css"; 
+window {
+  background: alpha(@base, 0.5);
+	border-radius: 10px;
+	border: 1px solid alpha(@surface0, 0.8);
+}
+
+#box {
+  /* Define attributes of the box surrounding icons here */
+  padding: 10px;
+}
+
+#active {
+	border-bottom: solid 3px @mauve;
+}
+
+button, image {
+	background: none;
+	border-style: none;
+	box-shadow: none;
+	color: #999;
+}
+
+button {
+	padding: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	color: #eee;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+button:hover {
+	background-color: alpha(@surface1, 0.5);
+}
+
+button:focus {
+	box-shadow: none
+}
