@@ -12,6 +12,8 @@ Specially designed for my laptop.
 - [Hyprland](https://hypr.land) - Tiling window manager. [[Install](https://wiki.hypr.land/Getting-Started/Installation/)], remember to install [hypr ecosystem components](#extra-hypr-ecosystem) (**KDE Plasma 6** as secondary DE)
 - [Waybar](https://github.com/Alexays/Waybar) - status bar. [[Install](https://github.com/Alexays/Waybar/wiki/Installation)]
 - [Dunst](https://dunst-project.org) *or* [Swaync](https://github.com/ErikReider/SwayNotificationCenter) - Notification daemon to receive notifications. Two of them as SwayNC dosen't work right now, thus dunst. [[Install dunst](https://github.com/dunst-project/dunst?tab=readme-ov-file#installation) | [Install Swaync](https://github.com/ErikReider/SwayNotificationCenter?tab=readme-ov-file#install)]
+- [tofi](https://github.com/philj56/tofi) - App launcher [Install](https://github.com/philj56/tofi)
+- [wofi](https://github.com/SimplyCEO/wofi) - Graphical menu [Install](https://github.com/SimplyCEO/wofi?tab=readme-ov-file#installing) (Also available on package manager)
 - [Kitty](https://sw.kovidgoyal.net/kitty/) - Terminal, simple as that. Might change it. [Install from package manager]
 - [wlogout](https://github.com/ArtsyMacaw/wlogout/) - logout menu. [Install](https://github.com/ArtsyMacaw/wlogout/tree/master?tab=readme-ov-file#install)
 - [nwg-dock-hyprland](https://github.com/nwg-piotr/nwg-dock-hyprland) - A dock for currently running apps. [Install](https://github.com/nwg-piotr/nwg-dock-hyprland?tab=readme-ov-file#installation)
