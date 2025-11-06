@@ -45,7 +45,7 @@
 	selection-background-corner-radius = 0
 
 	# Matching portion of selection text
-	selection-match-color = #eba0ac
+	selection-match-color = #b4befe
 
 
 	text-cursor-style = bar
