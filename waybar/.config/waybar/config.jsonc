@@ -312,7 +312,7 @@
             "custom/power",
             "custom/quit",
             "custom/lock",
-            "custom/sleep",
+            "custom/sleep"
             // "custom/reboot"
         ]
     },
