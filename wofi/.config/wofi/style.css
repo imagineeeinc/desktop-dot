@@ -60,9 +60,9 @@
 window {
   margin: 0px;
   padding: 10px;
-  /* border: 2px solid @lavender; */
-  border-radius: 8px;
-  background-color: @base;
+  border: 1px solid alpha(@overlay0, 0.8);
+  border-radius: 10px;
+  background-color: alpha(@base, 0.5);
 }
 
 /* Inner Box */
@@ -70,7 +70,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: @base;
+  background-color: transparent;
 }
 
 /* Outer Box */
@@ -78,7 +78,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: @base;
+  background-color: transparent;
 }
 
 /* Scroll */
@@ -86,7 +86,7 @@ window {
   margin: 0px;
   padding: 10px;
   border: none;
-  background-color: @base;
+  background-color: transparent;
 }
 
 /* Input */
@@ -96,7 +96,7 @@ window {
   border: none;
   border-radius: 10px;
   color: @text;
-  background-color: @base;
+  background-color: transparent;
 }
 
 #input image {
@@ -116,7 +116,7 @@ window {
 }
 
 #entry {
-  background-color: @base;
+  background-color: transparent;
 }
 
 #entry arrow {
@@ -126,11 +126,12 @@ window {
 
 /* Selected Entry */
 #entry:selected {
-  border: 0.11em solid @lavender;
+  background-color: alpha(@surface1, 0.5);
+  border: none;
 }
 
 #entry:selected #text {
-  color: @mauve;
+  color: @sapphire;
 }
 
 #entry:drop(active) {

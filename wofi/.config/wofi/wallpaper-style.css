@@ -59,9 +59,9 @@
 window {
   margin: 0px;
   padding: 10px;
-  /* border: 5px solid @lavender; */
+  border: 1px solid alpha(@overlay0, 0.8);
   border-radius: 10px;
-  background-color: @base;
+  background-color: alpha(@base, 0.5);
 }
 
 #input {
@@ -70,7 +70,7 @@ window {
   border: none;
   border-radius: 10px;
   color: @text;
-  background-color: @base;
+  background-color: transparent;
 }
 
 #input image {
@@ -82,26 +82,22 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  /* background-color: @base; */
 }
 
 #outer-box {
   margin: 5px;
   padding: 10px;
   border: none;
-  /* background-color: @base; */
 }
 
 #scroll {
   margin: 0px;
   padding: 10px;
   border: none;
-  /* background-color: @base; */
 }
 
 #text {
   margin: 2px;
-  /* color: #cdd6f4; */
 }
 
 #entry {
