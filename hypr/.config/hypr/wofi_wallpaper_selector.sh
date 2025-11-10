@@ -72,7 +72,8 @@ if [ -n "$selected" ]; then
     else
         # Get the original filename from the thumbnail path
         original_filename=$(basename "${thumbnail_path%.*}")
-
+        # Copy wallpaper so next time start up and lock screen share wallpaper
+        cp "$(find "$WALLPAPER_DIR" -type f -name "${original_filename}.*" | head -n1)" $(find "$WALLPAPER_DIR" -type f -name "wallpaper.*" | head -n1)
         # Find the corresponding original file in the wallpaper directory
         original_path=$(find "$WALLPAPER_DIR" -type f -name "${original_filename}.*" | head -n1)
     fi

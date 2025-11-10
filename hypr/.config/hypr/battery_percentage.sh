@@ -29,4 +29,4 @@ else
 fi
 
 # Output the icon and percentage
-echo "$icon   $percentage%"
+echo "$icon $percentage%"
