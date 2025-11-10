@@ -2,7 +2,7 @@
 window {
   background: alpha(@base, 0.5);
 	border-radius: 10px;
-	border: 1px solid alpha(@overlay0, 0.5);
+	border: 1px solid alpha(@overlay0, 0.8);
 }
 
 #box {
