@@ -69,13 +69,13 @@
 
 	width = 700
 	height = 800
-	background-color = #1e1e2ecc
+	background-color = #1e1e2e80
 
 	outline-width = 0
 	outline-color = #6c7086
 
 	border-width = 1
-	border-color = #6c708680
+	border-color = #6c7086cc
 
 	# Radius of window corners in pixels.
 	corner-radius = 10
