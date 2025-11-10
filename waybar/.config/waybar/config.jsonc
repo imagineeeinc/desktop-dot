@@ -4,17 +4,20 @@
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
+    "margin-top": 10,
+    "margin-left": 15,
+    "margin-right": 15,
     "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
         "privacy",
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "custom/cava"
     ],
     // "modules-center": [
     //     "hyprland/window"
     // ],
     "modules-right": [
-        "custom/cava",
         "temperature",
         "cpu",
         "memory",
@@ -368,7 +371,7 @@
       },
       "escape": false,
       "tooltip": true,
-      "exec": "~/.config/waybar/caway -b 16 -p Supersonic",
+      "exec": "~/.config/waybar/caway -b 16 -p mpd",
       "return-type": "json",
       "on-click": "playerctl play-pause",
       "on-click-right": "playerctl next",
