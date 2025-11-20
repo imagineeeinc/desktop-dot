@@ -1,0 +1,20 @@
+[left]
+enter_command = [ "hyprctl", "dispatch", "workspace", "r-1" ]
+
+locations = ["left"]
+
+size = 5
+margin = 127
+timeout_ms = 0
+color = "#FFFF0000"  # default
+
+[right]
+enter_command = [ "hyprctl", "dispatch", "workspace", "r+1" ]
+
+locations = ["right"]
+
+size = 5
+margin = 127
+timeout_ms = 0
+color = "#FFFF0000"  # default
+
