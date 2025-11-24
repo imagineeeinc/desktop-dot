@@ -28,3 +28,9 @@
     "text" : "Sleep",
     "keybind" : "s"
 }
+{
+    "label" : "windows",
+    "action" : "sudo grub2-reboot 4 && systemctl reboot",
+    "text" : "Windows",
+    "keybind" : "w"
+}
