@@ -10,6 +10,7 @@
     "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
+        "group/system",
         "privacy",
         "hyprland/workspaces",
         "custom/cava"
@@ -25,12 +26,17 @@
         "pulseaudio",
         "backlight",
         "group/network-group",
-        // "custom/weather",
+        // "custom/weaplayerctl previousther",
         "group/time",
         "group/battery-group",
         "group/power"
     ],
     // Modules configuration
+    "image#icon": {
+        "path": ".megastar.svg",
+        "size": 30,
+        "on-click": "python -m fabric execute Widgets \"toggle_system_menu()\" -j"
+    },
     "privacy": {
         "icon-size": 16,
         "icon-spacing": 10,
@@ -214,12 +220,13 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "  {signalStrength}%",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} ({essid}) via {gwaddr} ",
+        "format-wifi": "{icon}",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format-ethernet": " {ipaddr}/{cidr}",
+        "tooltip-format": " ({signalStrength}%) {ifname} ({essid}) via {gwaddr}",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "⚠ Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-disconnected": "󰤮",
+        "format-alt": "{ifname}: {ipaddr}/{cidr} ({signalStrength}%)"
     },
     "pulseaudio": {
         "scroll-step": 1, // %, can be a float
@@ -304,18 +311,18 @@
 
         ]
     },
-    "group/power": {
+    "group/system": {
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
             "children-class": "not-power",
-            "transition-left-to-right": false
+            "transition-left-to-right": true
         },
         "modules": [
-            "custom/power",
-            "custom/quit",
-            "custom/lock",
-            "custom/sleep"
+            "image#icon",
+            // "custom/quit",
+            "custom/sleep",
+            "custom/lock"
             // "custom/reboot"
         ]
     },
