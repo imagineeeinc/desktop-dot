@@ -8,6 +8,7 @@ from fabric.widgets.button import Button
 from fabric.widgets.entry import Entry
 from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.scrolledwindow import ScrolledWindow
+from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow as Window
 
 import os, subprocess, json, yaml
@@ -16,10 +17,110 @@ from functools import partial
 
 monitors = json.loads(subprocess.run(["/usr/bin/hyprctl", "monitors", "-j"], stdout=subprocess.PIPE).stdout.decode("utf-8"))
 monitor_conf = {}
+class Menu(Window):
+    def __init__(self, **kwargs):
+        super().__init__(
+            title="system-menu",
+            name="system-menu",
+            layer="top",
+            anchor="top left",
+            margin="1px 0px 0px 15px",
+            exclusivity="none",
+            keyboard_mode="on-demand",
+        )
+        self.connect("key-press-event", self._on_key_press)
+        self.cmds = [
+            "hyprsysteminfo &",
+            "wlogout &",
+            "kitty &",
+            "dolphin &",
+            "kitty btop &",
+            "plasma-discover &",
+            "kitty --class=rmpc rmpc &"
+        ]
+        self.add(
+            Box(
+                name="menu",
+                orientation="v",
+                spacing=10,
+                children=[
+                    Box(
+                        orientation="v",
+                        spacing=0,
+                        children=[
+                            Box(
+                                orientation="h",
+                                h_align="center",
+                                h_expand=True,
+                                spacing=10,
+                                name="menu_hori",
+                                children=[
+                                    Button(label="󰒮", style_classes = ["menu_hori"], on_clicked=lambda: self._direct_run("playerctl previous", hide=False)),
+                                    Button(label="", style_classes = ["menu_hori"], on_clicked=lambda: self._direct_run("playerctl play-pause", hide=False)),
+                                    Button(label="󰒭", style_classes = ["menu_hori"], on_clicked=lambda: self._direct_run("playerctl next", hide=False))
+                                ]
+                            ),
+                            Box(style_classes = ["spacer"]),
+                            Button(label="About",          on_clicked=lambda: self._run(0)),
+                            Button(label="Power Menu",     on_clicked=lambda: self._run(1)),
+                            Box(style_classes = ["spacer"]),
+                            Button(label="Terminal",       on_clicked=lambda: self._run(2)),
+                            Button(label="Explorer",       on_clicked=lambda: self._run(3)),
+                            Button(label="System Monitor", on_clicked=lambda: self._run(4)),
+                            Button(label="Store",          on_clicked=lambda: self._run(5)),
+                            Button(label="Music player",   on_clicked=lambda: self._run(6)),
+                            Box(style_classes = ["spacer"]),
+                            Box(
+                                orientation="h",
+                                spacing=2,
+                                name="menu_hori",
+                                children=[
+                                    Button(label="", name="poweroff", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("systemctl poweroff")),
+                                    Button(label="", name="windows", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("sudo grub2-reboot 4 && systemctl reboot")),
+                                    Button(label="󰜉", name="reboot", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("systemctl reboot")),
+                                    Button(label="󰗼", name="exit", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("hyprctl dispatch exit"))
+                                ]
+                            )
+                        ],
+                    )
+                ]
+            )
+        )
+        self.add_keybinding("esc", lambda self, _: quit(0))
+        self.add_keybinding("1", lambda self, _: self._run(0)),
+        self.add_keybinding("2", lambda self, _: self._run(1)),
+        self.add_keybinding("3", lambda self, _: self._run(2)),
+        self.add_keybinding("4", lambda self, _: self._run(3)),
+        self.add_keybinding("5", lambda self, _: self._run(4)),
+        self.add_keybinding("6", lambda self, _: self._run(5))
+        self.add_keybinding("7", lambda self, _: self._run(6))
+
+        self.add_keybinding("b", lambda self, _: self._direct_run("playerctl previous", hide=False)),   
+        self.add_keybinding("c", lambda self, _: self._direct_run("playerctl play-pause", hide=False)), 
+        self.add_keybinding("n", lambda self, _: self._direct_run("playerctl next", hide=False))        
+
+        self.visible = False
+        self.hide()
+
+    def _on_key_press(self, _, event):
+        if event.keyval == Gdk.KEY_Escape:
+            self.visible = False
+            self.hide()
+    def _direct_run(self, cmd, hide = True):
+        os.system(f'{cmd}')
+        if hide == True:
+            self.visible = False
+            self.hide()
+    def _run(self, cmd):
+        print(self.cmds, len(self.cmds))
+        os.system(f'{self.cmds[cmd]}')
+        self.visible = False
+        self.hide()
+
 class Monitor(Window):
     def __init__(self, **kwargs):
         super().__init__(
-            title="Monitor Settings",
+            title="monitor-settings",
             name="monitor-settings",
             layer="top",
             anchor="center",
@@ -68,11 +169,11 @@ class Monitor(Window):
 class Resolution(Window):
     def __init__(self, **kwargs):
         super().__init__(
-            title="Resolution Settings",
+            title="resolution-settings",
             name="resolution-settings",
             layer="top",
             anchor="top right",
-            margin="25px 25px 0px 0px",
+            margin="18px 18px 0px 0px",
             exclusivity="none",
             keyboard_mode="on-demand",
         )
@@ -167,11 +268,11 @@ class Resolution(Window):
 class Brightness(Window):
     def __init__(self, **kwargs):
         super().__init__(
-            title="Resolution Settings",
-            name="resolution-settings",
+            title="brightness-settings",
+            name="brightness-settings",
             layer="top",
             anchor="top right",
-            margin="25px 25px 0px 0px",
+            margin="18px 18px 0px 0px",
             exclusivity="none",
             keyboard_mode="on-demand",
         )
@@ -260,10 +361,22 @@ class Brightness(Window):
                 os.system(f"ddcutil --display {disp_parts[len(disp_parts)-1]} setvcp 10 {int(brightness)-5}")
                 self.list.children[index].children[1].value = int(brightness)-5
 
+global system_menu
+
+def toggle_system_menu():
+    global system_menu_vis
+    if system_menu.visible:
+        system_menu.hide()
+        system_menu.visible = False
+    else:
+        system_menu.show()
+        system_menu.visible = True
+
 if __name__ == "__main__":
     monitor_settings = Monitor()
     monitor_resolution = Resolution()
     monitor_brightness = Brightness()
+    system_menu = Menu()
     def on_monitors_changed(f, v):
         global monitors
         global monitor_conf
@@ -283,6 +396,7 @@ if __name__ == "__main__":
     app.add_window(monitor_settings)
     app.add_window(monitor_resolution)
     app.add_window(monitor_brightness)
+    app.add_window(system_menu)
 
     app.set_stylesheet_from_file(os.path.dirname(os.path.realpath(__file__))+"/style.css")
     app.run()
