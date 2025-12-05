@@ -165,16 +165,15 @@ button {
 }
 
 #bluetooth {
-    color: @sapphire;
-    border-top: 2px solid @sapphire;
+    color: @yellow;
+    border-top: 2px solid @yellow;
+    margin-right: 0;
 }
 #bluetooth.disabled {
-    color: @teal;
-    border-top: 2px solid @teal;
+    color: @peach;
 }
 #bluetooth.connected {
-    color: @lavender;
-    border-top: 2px solid @lavender;
+    color: @teal;
 }
 
 #pulseaudio {
@@ -321,7 +320,6 @@ button {
     margin-right: 0;
 }
 #custom-weather:hover {
-    background: @surface0;
     color: @green;
     border-top: 2px solid @green;
     margin-right: 5px;

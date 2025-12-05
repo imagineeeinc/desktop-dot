@@ -25,7 +25,8 @@
         "tray",
         "pulseaudio",
         "backlight",
-        "group/network-group",
+        "bluetooth",
+        "network",
         // "custom/weaplayerctl previousther",
         "group/time",
         "group/battery-group",
@@ -141,7 +142,8 @@
         "format": "",
         "format-disabled": "󰂲",
         "format-connected": "󰂱",
-        "format-connected-battery": "󰂱 {device_battery_percentage}%"
+        "format-connected-battery": "󰂱",
+        "tooltip-format-connected": "󰂱 {num_connections} devices connected\n{device_battery_percentage}%\n\n{device_enumerate}"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -161,8 +163,8 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-        "format": "{:%a %d/%m %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%d/%m %H:%M}",
+        "tooltip-format": "<big>{:%A %d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%d/%m/%Y}"
     },
     "cpu": {
@@ -194,6 +196,8 @@
             "warning": 30,
             "critical": 15
         },
+        "interval": 10,
+        "full-at": 80,
         "format": "{icon} {capacity}%",
         "format-full": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
@@ -202,7 +206,7 @@
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""],
-        "tooltip-format": "{time}"
+        "tooltip-format": "{capacity}% @ {power}W\n{time} time left\n\n{cycles} charge cycles"
     },
     "battery#bat2": {
         "bat": "BAT2"
@@ -223,7 +227,7 @@
         "format-wifi": "{icon}",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "format-ethernet": " {ipaddr}/{cidr}",
-        "tooltip-format": " ({signalStrength}%) {ifname} ({essid}) via {gwaddr}",
+        "tooltip-format": "<big>{icon}  Connected to <b>{essid}</b></big>\n({signalStrength}%) {ifname} via {gwaddr}\n\nUp: {bandwidthUpBits} ({bandwidthUpBytes})\nDown: {bandwidthDownBits} ({bandwidthDownBytes})",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "󰤮",
         "format-alt": "{ifname}: {ipaddr}/{cidr} ({signalStrength}%)"
