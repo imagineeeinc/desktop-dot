@@ -30,7 +30,7 @@ Geared more towared laptops.
 - [Cava](https://github.com/karlstav/cava) - Music visualizer (Package manager)
 - [Blueman applet](https://github.com/blueman-project/blueman) - Bluetooth manager gui. (Package manager)
 - [Network Manager](https://gitlab.freedesktop.org/NetworkManager/NetworkManager) - Network manager gui. (Package manager)
-- [Hyprshot](https://github.com/Gustash/hyprshot) - Screenshot tool (Copy the script)
+- [Hyprshot](https://github.com/Gustash/hyprshot) - Screenshot tool (Package manager)
 - [Emote](https://github.com/tom-james-watson/Emote) - Emoji picker (Flathub)
 - qt6ct & nwg-look - qt & gtk theme manager (respectively) (Package manager)
 - [Rosepine cursor](https://github.com/rose-pine/cursor) - Cursor theme (Manual install)
