@@ -22,6 +22,7 @@ Geared more towared laptops.
 - [Kitty](https://sw.kovidgoyal.net/kitty/) - Terminal, simple as that. [Install from package manager]
 - [wlogout](https://github.com/ArtsyMacaw/wlogout/) - logout menu. [Install](https://github.com/ArtsyMacaw/wlogout/tree/master?tab=readme-ov-file#install)
 - [nwg-dock-hyprland](https://github.com/nwg-piotr/nwg-dock-hyprland) - A dock for currently running apps. [Install](https://github.com/nwg-piotr/nwg-dock-hyprland?tab=readme-ov-file#installation)
+- [doas](https://github.com/Duncaen/OpenDoas) - sudo replacement, used to allow certain commands to run with out password prompt (or fingerprint). [package manager]
 
 ## Extra required software
 
