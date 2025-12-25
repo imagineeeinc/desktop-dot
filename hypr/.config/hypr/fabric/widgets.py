@@ -76,7 +76,7 @@ class Menu(Window):
                                 name="menu_hori",
                                 children=[
                                     Button(label="", name="poweroff", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("systemctl poweroff")),
-                                    Button(label="", name="windows", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("doas grub2-reboot 4 && systemctl reboot")),
+                                    Button(label="", name="windows", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("doas grub2-reboot 3 && systemctl reboot")),
                                     Button(label="󰜉", name="reboot", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("systemctl reboot")),
                                     Button(label="󰗼", name="exit", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("hyprctl dispatch exit"))
                                 ]
