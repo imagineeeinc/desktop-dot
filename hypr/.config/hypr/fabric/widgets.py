@@ -112,7 +112,6 @@ class Menu(Window):
             self.visible = False
             self.hide()
     def _run(self, cmd):
-        print(self.cmds, len(self.cmds))
         os.system(f'{self.cmds[cmd]}')
         self.visible = False
         self.hide()
@@ -314,9 +313,12 @@ class Brightness(Window):
             if monitor["name"] == "eDP-1":
                 brightness = subprocess.run(["/usr/bin/brightnessctl" ,"g", "--percentage"], stdout=subprocess.PIPE).stdout.decode("utf-8")
             else:
-                brightness = subprocess.run(["/usr/bin/ddcutil", "-d" ,"1", "getvcp" ,"10"], stdout=subprocess.PIPE).stdout.decode("utf-8")
-                brightness = brightness.split('current value =')[1]
-                brightness = brightness.split(',')[0].strip()
+                brightness = subprocess.run(["/usr/bin/ddcutil", "-d" ,"1", "getvcp", "10"], stdout=subprocess.PIPE).stdout.decode("utf-8")
+                if brightness.startswith("VCP code 0x10"):
+                    brightness = brightness.split('current value =')[1]
+                    brightness = brightness.split(',')[0].strip()
+                else:
+                    continue
             self.list.add(
                 Box(
                     orientation="v",
