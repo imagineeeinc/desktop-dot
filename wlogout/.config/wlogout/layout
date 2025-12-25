@@ -30,7 +30,7 @@
 }
 {
     "label" : "windows",
-    "action" : "doas grub2-reboot 4 && systemctl reboot",
+    "action" : "doas grub2-reboot 3 && systemctl reboot",
     "text" : "Windows",
     "keybind" : "w"
 }
