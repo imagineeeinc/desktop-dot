@@ -61,7 +61,7 @@ class Menu(Window):
                                 ]
                             ),
                             Box(style_classes = ["spacer"]),
-                            Button(label="About",          on_clicked=lambda: self._run(0)),
+                            Button(label="About HoshiOS",          on_clicked=lambda: self._run(0)),
                             Button(label="Power Menu",     on_clicked=lambda: self._run(1)),
                             Box(style_classes = ["spacer"]),
                             Button(label="Terminal",       on_clicked=lambda: self._run(2)),
