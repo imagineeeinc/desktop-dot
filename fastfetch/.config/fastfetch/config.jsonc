@@ -32,12 +32,12 @@
   "modules": [
     "title",
     "separator",
-    "host",
     {
       "type": "os",
       "key": "OS",
-      "format": "{name} {version}"
+      "format": "{name}" // {version}
     },
+    "host",
     {
       "type": "kernel",
       "key": "Kernel"
