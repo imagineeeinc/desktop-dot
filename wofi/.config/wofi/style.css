@@ -58,8 +58,8 @@
 
 /* Window */
 window {
-  margin: 0px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
   border: 1px solid alpha(@overlay0, 0.8);
   border-radius: 10px;
   background-color: alpha(@base, 0.5);
@@ -67,33 +67,33 @@ window {
 
 /* Inner Box */
 #inner-box {
-  margin: 5px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
   border: none;
   background-color: transparent;
 }
 
 /* Outer Box */
 #outer-box {
-  margin: 5px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
   border: none;
   background-color: transparent;
 }
 
 /* Scroll */
 #scroll {
-  margin: 0px;
-  padding: 10px;
+  margin: 0;
+  padding: 0;
   border: none;
   background-color: transparent;
 }
 
 /* Input */
 #input {
-  margin: 5px 20px;
-  padding: 10px;
+  padding: 0 10px;
   border: none;
+  outline: none;
   border-radius: 10px;
   color: @text;
   background-color: transparent;
@@ -117,6 +117,8 @@ window {
 
 #entry {
   background-color: transparent;
+  padding: 0 10px;
+  border-radius: 0;
 }
 
 #entry arrow {
@@ -128,6 +130,7 @@ window {
 #entry:selected {
   background-color: alpha(@surface1, 0.5);
   border: none;
+  outline: none;
 }
 
 #entry:selected #text {
