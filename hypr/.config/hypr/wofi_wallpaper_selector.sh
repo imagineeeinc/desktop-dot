@@ -82,14 +82,14 @@ if [ -n "$selected" ]; then
     if [ -n "$original_path" ]; then
         # Set wallpaper using swww with the original file
         # hyprctl hyprpaper reload , "$original_path"
-        awww img "$original_path" --transition-type=outer --transition-pos=bottom --transition-duration=2 --transition-fps=120 --transition-bezier=0.80,0,0.23,1
+        awww img "$original_path" --transition-type=outer --transition-pos=bottom --transition-duration=2 --transition-fps=120 --transition-bezier=0.80,0,0.23,1 --resize=crop
 
         # Save the selection for persistence
         echo "$original_path" > "$HOME/.cache/current_wallpaper"
 
         # Optional: Notify user
-        notify-send "Wallpaper" "Wallpaper has been updated" -i "$original_path"
+        notify-send "Wallpaper Change" "Wallpaper has been updated" -i "$original_path" -a "Wallpaper Switcher"
     else
-        notify-send "Wallpaper Error" "Could not find the original wallpaper file."
+        notify-send "Wallpaper Error" "Could not find the original wallpaper file." -a "Wallpaper Switcher"
     fi
 fi
