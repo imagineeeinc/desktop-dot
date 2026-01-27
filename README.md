@@ -1,4 +1,4 @@
-# Desktop Dotfiles
+# HoshiOS
 
 ![Desktop with fastfetch](./screenshots/screenshot2.1.png)
 
@@ -12,9 +12,10 @@ Geared more towared laptops.
 - [Hyprland](https://hypr.land) - Tiling window manager. [Install](https://wiki.hypr.land/Getting-Started/Installation/), remember to install hypr ecosystem components listed bellow (**KDE Plasma 6** as secondary DE)
   - Hypridle
   - Hyprlock
-  - Hyprpaper
+  - ~~Hyprpaper~~ Deprecated, superseded by [awww](https://codeberg.org/LGFae/awww)
   - Hyprpolkitagent
 - [Fabric](https://wiki.ffpy.org) - Widget system in python. [Install](https://wiki.ffpy.org/getting-started/installation-guide/)
+- [awww](https://codeberg.org/LGFae/awww) - Wallpaper system. [Install: `cargo install awww awww-daemon --git https://codeberg.org/LGFae/awww.git`]
 - [Waybar](https://github.com/Alexays/Waybar) - status bar. [[Install](https://github.com/Alexays/Waybar/wiki/Installation)]
 - [Dunst](https://dunst-project.org) - Notification daemon to receive notifications. [Install](https://github.com/dunst-project/dunst?tab=readme-ov-file#installation)
 - [tofi](https://github.com/philj56/tofi) - App launcher [Install](https://github.com/philj56/tofi)
@@ -36,6 +37,9 @@ Geared more towared laptops.
 - qt6ct & nwg-look - qt & gtk theme manager (respectively) (Package manager)
 - [Rosepine cursor](https://github.com/rose-pine/cursor) - Cursor theme (Manual install)
 - [nwg-displays](https://github.com/nwg-piotr/nwg-displays) - Display output manager (Compiled)
+- [iwmenu](https://github.com/e-tho/iwmenu) - dmenu based wifi manager, reliant on iwd [refer to [this](https://discussion.fedoraproject.org/t/howto-replace-wpa-supplicant-with-iwd-a-newer-wireless-daemon/144111) for switching to iwd on Fedora] (Install: `cargo install iwmenu --git https://github.com/e-tho/iwmenu.git`)
+- [bzmenu](https://github.com/e-tho/bzmenu) - dmenu based bluetooth manager (Install: `cargo install bzmenu --git https://github.com/e-tho/bzmenu.git`)
+- [pwmenu](https://github.com/e-tho/pwmenu) - demenu based pipewire manager (Install: `cargo install pwmenu --git https://github.com/e-tho/pwmenu.gi`)
 
 ## Installing
 
