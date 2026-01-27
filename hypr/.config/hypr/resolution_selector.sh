@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ $# -eq 0 ]; then
-  op=$( echo -e "Standard\n1920x1080" | wofi -i --dmenu )
+  op=$( echo -e "Standard\n1920x1080" | wofi -i --dmenu --prompt 'Select Resolution' )
 else
   op=$1
 fi
