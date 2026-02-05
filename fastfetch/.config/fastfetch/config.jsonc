@@ -17,8 +17,10 @@
     },
     "bar": {
       "width": 10,
-      "charElapsed": "■",
-      "charTotal": "-"
+      "char": {
+        "elapsed": "■",
+        "total": "-"
+      }
     },
     "percent": {
       "type": 9,         // 1=number, 2=bar, 3=both, 9=colored number
