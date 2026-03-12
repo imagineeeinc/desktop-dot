@@ -11,7 +11,6 @@
     // Choose the order of the modules
     "modules-left": [
         "group/system",
-        "privacy",
         "hyprland/workspaces",
         "custom/cava"
     ],
@@ -23,6 +22,7 @@
         "cpu",
         "memory",
         "tray",
+        "privacy",
         "pulseaudio",
         "backlight",
         "bluetooth",
@@ -374,11 +374,10 @@
         "return-type": "json"
     },
     "custom/cava": {
-      "format": "{text}",
+      "format": "{text}{icon}",
       "format-icons": {
-          // "Playing": " ", // Uncomment if not using caway
-          "Paused": " ",
-          "Stopped": " "
+          "Playing": "",
+          "Paused": ""
       },
       "escape": false,
       "tooltip": true,

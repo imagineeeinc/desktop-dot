@@ -87,9 +87,9 @@ clean_create_pipe $playerctl_waybar_pipe
 # playerctl output into playerctl_waybar_pipe
 
 if [[ $PLAYER = 'null' ]]; then
-  playerctl metadata --format '{"text": "{{artist}} - {{title}}", "tooltip": "{{playerName}} : {{markup_escape(artist)}} - {{markup_escape(title)}}", "alt": "{{status}}", "class": "{{status}}"}' -F >$playerctl_waybar_pipe &
+  playerctl metadata --format '{"tooltip": "{{playerName}} : {{markup_escape(artist)}} - {{markup_escape(title)}}", "alt": "{{status}}", "class": "{{status}}"}' -F >$playerctl_waybar_pipe &
 else
-  playerctl -p $PLAYER metadata --format '{"text": "{{artist}} - {{title}}", "tooltip": "{{playerName}} : {{markup_escape(artist)}} - {{markup_escape(title)}}", "alt": "{{status}}", "class": "{{status}}"}' -F >$playerctl_waybar_pipe &
+  playerctl -p $PLAYER metadata --format '{"tooltip": "{{markup_escape(artist)}} - {{markup_escape(title)}}", "alt": "{{status}}", "class": "{{status}}"}' -F >$playerctl_waybar_pipe &
 fi
 
 # Read the playerctl o/p via its fifo pipe

@@ -24,19 +24,10 @@ button {
 }
 
 #workspaces button {
-    padding: 0 8px 0 2px;
+    padding: 0 8px 0 3px;
     /* border-top: 2px solid @mauve; */
     /* border-bottom: 2px solid @mauve; */
     /* background: @crust; */
-}
-#workspaces button:first-child {
-    /* border-radius: 10px 0 0 10px; */
-    /* border-left: 2px solid @mauve; */
-    
-}
-.modules-left>widget:first-child>#workspaces>button:first-child {
-    border-radius: 10px 0 0 10px;
-    padding-left: 6px;
 }
 #workspaces button:last-child {
     /* border-radius: 0 10px 10px 0; */
@@ -51,6 +42,8 @@ button {
 #workspaces button:hover {
     background: alpha(@surface1, 0.5);
     color: @teal;
+    border-top: 1px solid alpha(@overlay0, 0.8);
+    border-bottom: 1px solid alpha(@overlay0, 0.8);
 }
 #workspaces button.active {
     color: @rosewater;
@@ -83,6 +76,7 @@ button {
     padding: 0 4px 0 5px;
     border-radius: 10px 0 0 10px;
     border: 1px solid transparent;
+    margin-right: 10px;
 }
 #image.icon:hover {
     background: alpha(@blue, 0.2);
@@ -92,6 +86,9 @@ button {
 }
 #image.icon:active {
     background: alpha(@sapphire, 0.2);
+}
+#system:hover #image.icon {
+    margin-right: 0;
 }
 
 #custom-music,
@@ -117,8 +114,10 @@ button {
 }
 
 #privacy {
-    /* margin-left: 15px; */
-    /* border: 2px solid @lavender; */
+    background: alpha(@teal, 0.4);
+    color: @crust;
+    padding: 5px 15px;
+    border-top: 2px solid @green;
 }
 
 #custom-music {
