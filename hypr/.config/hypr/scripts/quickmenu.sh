@@ -13,7 +13,7 @@ case $op in
     pwmenu --launcher custom --launcher-command "wofi -i --dmenu --prompt '{hint}'"
     ;;
   "󰸉 Wallaper")
-    ~/.config/hypr/wofi_wallpaper_selector.sh
+    ~/.config/hypr/scripts/wofi_wallpaper_selector.sh
     ;;
   "󱋆 Monitor Config")
     python -m fabric execute Widgets "monitor_resolution.show()"
