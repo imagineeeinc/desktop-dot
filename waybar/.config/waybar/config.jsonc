@@ -226,7 +226,7 @@
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{icon}",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-        "format-ethernet": " {ipaddr}/{cidr}",
+        "format-ethernet": " {bandwidthTotalBytes}",
         "tooltip-format": "<big>{icon}  Connected to <b>{essid}</b></big>\n({signalStrength}%) {ifname} via {gwaddr}\n\nUp: {bandwidthUpBits} ({bandwidthUpBytes})\nDown: {bandwidthDownBits} ({bandwidthDownBytes})",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "󰤮",
