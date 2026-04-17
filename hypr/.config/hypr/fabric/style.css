@@ -35,6 +35,14 @@ window {
   padding: 20px;
   border: 1px solid alpha(@overlay0, 0.8);
 }
+#main-box-no-padding {
+  border-radius: 10px;
+  padding: 0;
+  border: 1px solid alpha(@overlay0, 0.8);
+}
+.padding-20 {
+  padding: 20px;
+}
 button {
   transition-duration: .2s;
 }
@@ -121,4 +129,17 @@ button:focus {
 #exit:hover {
   background: @yellow;
   color: @crust;
+}
+
+#time, #time:hover, #time:active {
+  background: alpha(#000, 0);
+}
+
+#progress_bar {
+  background: @surface0;
+  border-radius: 20px;
+}
+#progress_time {
+  background: @sapphire;
+  border-radius: 20px;
 }

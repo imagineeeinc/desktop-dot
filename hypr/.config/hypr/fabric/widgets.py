@@ -9,14 +9,39 @@ from fabric.widgets.entry import Entry
 from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from fabric.widgets.revealer import Revealer
+from fabric.widgets.datetime import DateTime
+from fabric.widgets.image import Image
 from fabric.widgets.wayland import WaylandWindow as Window
+
+from mpd import MPDClient
 
 import os, subprocess, json, yaml
 from pathlib import Path
+import tempfile
+import mimetypes
+import time
 from functools import partial
 
 monitors = json.loads(subprocess.run(["/usr/bin/hyprctl", "monitors", "-j"], stdout=subprocess.PIPE).stdout.decode("utf-8"))
 monitor_conf = {}
+
+client = MPDClient()
+client.timeout = 10
+client.connect("localhost", 6600)
+
+music_title = ""
+music_album = ""
+music_artist = ""
+music_length = 0
+music_time = 0
+music_cover = ""
+music_playing = False
+music_playlist = 0
+music_playlist_pos = 0 
+
+notifications_json = json.loads(subprocess.run(["/usr/bin/dunstctl", "history"], stdout=subprocess.PIPE).stdout.decode("utf-8"))
+notifications = notifications_json["data"][0]
+
 class Menu(Window):
     def __init__(self, **kwargs):
         super().__init__(
@@ -24,7 +49,7 @@ class Menu(Window):
             name="system-menu",
             layer="top",
             anchor="top left",
-            margin="1px 0px 0px 15px",
+            margin="18px 0px 0px 18px",
             exclusivity="none",
             keyboard_mode="on-demand",
         )
@@ -76,7 +101,7 @@ class Menu(Window):
                                 name="menu_hori",
                                 children=[
                                     Button(label="", name="poweroff", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("systemctl poweroff")),
-                                    Button(label="", name="windows", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("doas grub2-reboot 3 && systemctl reboot")),
+                                    Button(label="", name="windows", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("doas grub2-reboot 4 && systemctl reboot")),
                                     Button(label="󰜉", name="reboot", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("systemctl reboot")),
                                     Button(label="󰗼", name="exit", style_classes = ["menu_hori", "bottom"], on_clicked=lambda: self._direct_run("hyprctl dispatch exit"))
                                 ]
@@ -86,7 +111,6 @@ class Menu(Window):
                 ]
             )
         )
-        self.add_keybinding("esc", lambda self, _: quit(0))
         self.add_keybinding("1", lambda self, _: self._run(0)),
         self.add_keybinding("2", lambda self, _: self._run(1)),
         self.add_keybinding("3", lambda self, _: self._run(2)),
@@ -162,7 +186,7 @@ class Monitor(Window):
         if event.keyval == Gdk.KEY_Escape:
             self.hide()
     def _monitor_switch(self, item):
-        os.system(f'/bin/bash ~/.config/hypr/display_mode.sh "{item}"')
+        os.system(f'/bin/bash ~/.config/hypr/scripts/display_mode.sh "{item}"')
         self.hide()
 
 class Resolution(Window):
@@ -261,7 +285,7 @@ class Resolution(Window):
             scale_c = [r["scale"] for r in monitor_c[0]["resolutions"] if res in r["name"]]
             if len(scale_c) > 0:
                 scale = scale_c[0] or 1
-        os.system(f'/bin/bash ~/.config/hypr/resolution_selector.sh "{res}" "{monitor}" "{str(scale)}" "{monitors[self.selected]["x"]}x{monitors[self.selected]["y"]}"')
+        os.system(f'/bin/bash ~/.config/hypr/scripts/resolution_selector.sh "{res}" "{monitor}" "{str(scale)}" "{monitors[self.selected]["x"]}x{monitors[self.selected]["y"]}"')
         self.hide()
 
 class Brightness(Window):
@@ -363,7 +387,166 @@ class Brightness(Window):
                 os.system(f"ddcutil --display {disp_parts[len(disp_parts)-1]} setvcp 10 {int(brightness)-5}")
                 self.list.children[index].children[1].value = int(brightness)-5
 
+class Notification(Window):
+    def __init__(self, **kwargs):
+        super().__init__(
+            title="notification-center",
+            name="notification-center",
+            layer="top",
+            anchor="top-right",
+            margin="18px 18px 0px 0px",
+            exclusivity="none",
+            v_expand=True,
+            keyboard_mode="on-demand",
+        )
+        self.connect("key-press-event", self._on_key_press)
+        self.res_list=Box(
+            orientation="v",
+            spacing=10,
+        )
+        self.add(
+            Box(
+                name="main-box",
+                orientation="v",
+                spacing=10,
+                size=[500,500],
+                children=[
+                    Box(
+                        orientation="h",
+                        spacing=20,
+                        children=[
+                            Label("Notifications",style_classes=["font-large"]),
+                            DateTime(
+                                formatters="%I:%M:%S %p\n%A %d of %B %Y",
+                                h_align="end",
+                                name="time"
+                            )
+                        ]
+                    ),
+                    ScrolledWindow(
+                        min_content_size=[250, 300],
+                        size=[500,300],
+                        h_scrollbar_policy="never",
+                        v_expand=True,
+                        h_align="start",
+                        child=self.res_list,
+                    )
+                ]
+            )
+        )
+        self.add_keybinding("esc", lambda self, _: quit(0))
+        self.visible = False
+        self.hide()
+        self.update()
+    def update(self):
+        global notifications
+        self.res_list.children = []
+        for notification in notifications:
+            self.res_list.add(
+                Box(
+                    orientation="v",
+                    spacing=10,
+                    children=[
+                        Label(
+                            notification["body"]["data"],
+                            max_chars_width=80,
+                            line_wrap="word",
+                            h_align="start"
+                        )
+                    ]
+                )
+            )
+
+    def _on_key_press(self, _, event):
+        if event.keyval == Gdk.KEY_Escape:
+            self.visible = False
+            self.hide()
+
+class Music(Window):
+    def __init__(self, **kwargs):
+        super().__init__(
+            title="music-center",
+            name="music-center",
+            layer="top",
+            anchor="top-center",
+            margin="18px 0px 0px 0px",
+            exclusivity="none",
+            v_expand=True,
+            keyboard_mode="on-demand",
+        )
+        self.connect("key-press-event", self._on_key_press)
+        self.cover = Box(children=[Image(size=[150,150])])
+        self.list = Box(
+            orientation="v",
+            spacing=10,
+            h_align="start",
+            size=[400,150]
+        )
+        self.progress = Box(
+            orientation="h",
+            name = "progress_bar",
+            size = [600,20]
+        )
+        self.add(
+            Box(
+                name="main-box-no-padding",
+                orientation="v",
+                children=[
+                   Box(
+                        orientation="h",
+                        spacing=20,
+                        size=[600,200],
+                        style_classes=["padding-20"],
+                        children=[
+                            self.cover,
+                            self.list
+                        ]
+                    ),
+                    self.progress,
+                ]
+            )
+        )
+        self.add_keybinding("esc", lambda self, _: quit(0))
+        self.visible = False
+        self.hide()
+    def update(self):
+        self.cover.children = [Image(image_file = music_cover,size=[150,150])]
+        self.list.children = []
+        self.list.add(Label(music_title, style_classes=["font-medium"], h_align="start", ellipsization="end"))
+        self.list.add(Label(f"{music_artist} • {music_album}", h_align="start", ellipsization="end"))
+        self.list.add(
+            Label(
+                f"{time.strftime("%M:%S", time.gmtime(music_time))}/{time.strftime("%M:%S", time.gmtime(music_length))} • {music_playlist_pos}/{music_playlist}",
+                h_align="start"
+            )
+        )
+        if music_playing == True:
+            play_icon = ""
+        else:
+            play_icon = ""
+        self.list.add(
+            Box(
+                orientation="h",
+                h_align="center",
+                h_expand=True,
+                spacing=10,
+                children=[
+                    Button(label="", style_classes = ["menu_hori"], on_clicked=lambda: subprocess.run(["/usr/bin/mpc", "seekthrough", "-5"])),
+                    Button(label="󰒮", style_classes = ["menu_hori"], on_clicked=lambda: subprocess.run(["/usr/bin/mpc", "prev"])),
+                    Button(label=play_icon, style_classes = ["menu_hori"], on_clicked=lambda: subprocess.run(["/usr/bin/mpc", "toggle"])),
+                    Button(label="󰒭", style_classes = ["menu_hori"], on_clicked=lambda: subprocess.run(["/usr/bin/mpc", "next"])),
+                    Button(label="", style_classes = ["menu_hori"], on_clicked=lambda: subprocess.run(["/usr/bin/mpc", "seekthrough", "5"])),
+                ]
+            )
+        )
+        self.progress.children = [Box(name = "progress_time", size=[int((music_time/music_length)*600),20])]
+    def _on_key_press(self, _, event):
+        if event.keyval == Gdk.KEY_Escape:
+            self.visible = False
+            self.hide()
+
 global system_menu
+global notification_center
 
 def toggle_system_menu():
     global system_menu_vis
@@ -374,11 +557,29 @@ def toggle_system_menu():
         system_menu.show()
         system_menu.visible = True
 
+def toggle_notification_center():
+    global notification_center_vis
+    global notifications
+    global notifications_json
+    if notification_center.visible:
+        notification_center.hide()
+        notification_center.visible = False
+    else:
+        notifications_json = json.loads(subprocess.run(["/usr/bin/dunstctl", "history"], stdout=subprocess.PIPE).stdout.decode("utf-8"))
+        notifications = notifications_json["data"][0]
+        notification_center.update()
+        notification_center.show()
+        notification_center.visible = True
+
+
 if __name__ == "__main__":
     monitor_settings = Monitor()
     monitor_resolution = Resolution()
     monitor_brightness = Brightness()
     system_menu = Menu()
+    notification_center = Notification()
+    music_center = Music()
+
     def on_monitors_changed(f, v):
         global monitors
         global monitor_conf
@@ -388,10 +589,53 @@ if __name__ == "__main__":
             monitor_conf = yaml.safe_load(f)
         monitor_resolution.update_list()
 
+    def on_music_changed(f, v):
+        global music_title
+        global music_album
+        global music_artist
+        global music_length
+        global music_time
+        global music_cover
+        global music_playing
+        global music_playlist
+        global music_playlist_pos
+        current = client.currentsong()
+        cover_data = client.readpicture(current["file"])
+        mime_type = cover_data.get("type")
+        extension = mimetypes.guess_extension(mime_type) if mime_type else ".bin"
+        if not extension:
+            extension = ".jpg"
+        temp_path = os.path.join(tempfile.gettempdir(), f"music_center_cover{extension}")
+        try:
+            with open(temp_path, 'wb') as f:
+                f.write(cover_data['binary'])
+        except Exception as e:
+            print(f"Failed to write file: {e}")
+        music_cover = temp_path
+
+        music_title = current["title"]
+        music_artist = current["artist"]
+        music_album = current["album"]
+        status = client.status()
+        music_time = float(status["elapsed"])
+        music_length = float(status["duration"])
+        music_playlist = status["playlistlength"]
+        music_playlist_pos = status["song"]
+        if status["state"] == "play":
+            music_playing = True
+        else:
+            music_playing = False
+        music_center.update()
+
     monitors_fabricator = Fabricator(
         interval=1000*5,
         poll_from=lambda f: subprocess.run(["/usr/bin/hyprctl", "monitors", "-j"], stdout=subprocess.PIPE).stdout.decode("utf-8"),
         on_changed=on_monitors_changed
+    )
+    music_fabricator = Fabricator(
+        interval=1000,
+        poll_from=lambda f: subprocess.run(["/usr/bin/mpc", "current"], stdout=subprocess.PIPE).stdout.decode("utf-8"),
+        on_changed=on_music_changed
     )
 
     app = Application("Widgets")
@@ -399,6 +643,8 @@ if __name__ == "__main__":
     app.add_window(monitor_resolution)
     app.add_window(monitor_brightness)
     app.add_window(system_menu)
+    app.add_window(notification_center)
+    app.add_window(music_center)
 
     app.set_stylesheet_from_file(os.path.dirname(os.path.realpath(__file__))+"/style.css")
     app.run()
