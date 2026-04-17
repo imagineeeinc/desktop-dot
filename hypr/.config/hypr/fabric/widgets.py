@@ -507,6 +507,12 @@ class Music(Window):
             )
         )
         self.add_keybinding("esc", lambda self, _: quit(0))
+        self.add_keybinding("q", lambda self, _: quit(0))
+        self.add_keybinding("x", lambda self, _: subprocess.run(["/usr/bin/mpc", "seekthrough", "-5"])),
+        self.add_keybinding("b", lambda self, _: subprocess.run(["/usr/bin/mpc", "prev"])),
+        self.add_keybinding("c", lambda self, _: subprocess.run(["/usr/bin/mpc", "toggle"])),
+        self.add_keybinding("n", lambda self, _: subprocess.run(["/usr/bin/mpc", "next"])),
+        self.add_keybinding("v", lambda self, _: subprocess.run(["/usr/bin/mpc", "seekthrough", "5"]))
         self.visible = False
         self.hide()
     def update(self):
