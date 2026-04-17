@@ -173,7 +173,6 @@ class Monitor(Window):
                 ]
             )
         )
-        self.add_keybinding("esc", lambda self, _: quit(0))
         self.add_keybinding("1", lambda self, _: self._monitor_switch("Screen1")),
         self.add_keybinding("2", lambda self, _: self._monitor_switch("Screen2")),
         self.add_keybinding("3", lambda self, _: self._monitor_switch("Mirror")),
@@ -434,7 +433,6 @@ class Notification(Window):
                 ]
             )
         )
-        self.add_keybinding("esc", lambda self, _: quit(0))
         self.visible = False
         self.hide()
         self.update()
@@ -506,8 +504,7 @@ class Music(Window):
                 ]
             )
         )
-        self.add_keybinding("esc", lambda self, _: quit(0))
-        self.add_keybinding("q", lambda self, _: quit(0))
+        self.add_keybinding("q", lambda self, _: self.hide())
         self.add_keybinding("x", lambda self, _: subprocess.run(["/usr/bin/mpc", "seekthrough", "-5"])),
         self.add_keybinding("b", lambda self, _: subprocess.run(["/usr/bin/mpc", "prev"])),
         self.add_keybinding("c", lambda self, _: subprocess.run(["/usr/bin/mpc", "toggle"])),
@@ -548,7 +545,6 @@ class Music(Window):
         self.progress.children = [Box(name = "progress_time", size=[int((music_time/music_length)*600),20])]
     def _on_key_press(self, _, event):
         if event.keyval == Gdk.KEY_Escape:
-            self.visible = False
             self.hide()
 
 global system_menu
