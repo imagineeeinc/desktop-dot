@@ -549,9 +549,9 @@ class Music(Window):
 
 global system_menu
 global notification_center
+global music_center
 
 def toggle_system_menu():
-    global system_menu_vis
     if system_menu.visible:
         system_menu.hide()
         system_menu.visible = False
@@ -573,6 +573,13 @@ def toggle_notification_center():
         notification_center.show()
         notification_center.visible = True
 
+def toggle_music_center():
+    if music_center.visible:
+        music_center.hide()
+        music_center.visible = False
+    else:
+        music_center.show()
+        music_center.visible = True
 
 if __name__ == "__main__":
     monitor_settings = Monitor()
