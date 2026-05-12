@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 while true; do
   BATTERY_LEVEL=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | grep -o '[0-9]*')
   STATUS=$(cat /sys/class/power_supply/BAT0/status)

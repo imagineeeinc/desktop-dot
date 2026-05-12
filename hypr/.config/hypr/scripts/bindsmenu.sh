@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # 1. Get the binds from hyprctl in JSON format
 # 2. Use jq to filter for binds that have a description
