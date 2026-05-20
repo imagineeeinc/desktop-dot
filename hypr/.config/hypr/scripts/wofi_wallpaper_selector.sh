@@ -88,8 +88,8 @@ if [ -n "$selected" ]; then
         echo "$original_path" > "$HOME/.cache/current_wallpaper"
 
         # Optional: Notify user
-        notify-send "Wallpaper Change" "Wallpaper has been updated" -i "$original_path" -a "Wallpaper Switcher"
+        notify-send "Wallpaper Change" "Wallpaper has been updated" -i "$original_path" -n ~/.config/swaync/megastar.png -a "Wallpaper Switcher"
     else
-        notify-send "Wallpaper Error" "Could not find the original wallpaper file." -a "Wallpaper Switcher"
+        notify-send "Wallpaper Error" "Could not find the original wallpaper file." -n ~/.config/swaync/megastar.png -a "Wallpaper Switcher"
     fi
 fi

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-op=$( echo -e "  Wifi\n Bluetooth\n󰤽 Audio\n󱋆 Monitor Config\n󰍺 Projection Config\n Resume Suspended Applications\n󰸉 Wallaper" | wofi -i --dmenu )
+op=$( echo -e "  Wifi\n Bluetooth\n󰤽 Audio\n󱋆 Monitor Config\n󰍺 Projection Config\n Resume Suspended Applications\n󰸉 Wallaper" | wofi -i --dmenu --prompt "Select a quick shortcut" )
 
 case $op in
   "  Wifi")
