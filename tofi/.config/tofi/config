@@ -112,7 +112,7 @@
 
 	# Window offset from edge of screen. Only has an effect when anchored
 	# to the relevant edge. Can be pixels or a percentage.
-	margin-top = 20
+	margin-top = 16
 	margin-bottom = 0
 	margin-left = 0
 	margin-right = 0
