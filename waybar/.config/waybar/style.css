@@ -151,8 +151,8 @@ button {
     border: none;
 }
 #clock {
-    color: @peach;
-    border-top: 2px solid @peach;
+    color: @mauve;
+    border-top: 2px solid @mauve;
 }
 #clock:hover {
     border-left: none;
@@ -176,8 +176,8 @@ button {
 }
 
 #pulseaudio {
-    color: @lavender;
-    border-top: 2px solid @lavender;
+    color: @blue;
+    border-top: 2px solid @blue;
 }
 
 #network {
@@ -187,9 +187,9 @@ button {
 }
 
 #battery {
-    color: @flamingo;
-    border-top: 2px solid @flamingo;
-    margin-right: 10px;
+    color: @lavender;
+    border-top: 2px solid @lavender;
+    /* margin-right: 10px; */
 }
 #battery.warning {
     /* color: @surface0; */
@@ -211,8 +211,8 @@ button {
 }
 
 #backlight {
-    color: @pink;
-    border-top: 2px solid @pink;
+    color: @peach;
+    border-top: 2px solid @peach;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -322,4 +322,13 @@ button {
     color: @green;
     border-top: 2px solid @green;
     margin-right: 5px;
+}
+#custom-notification {
+  color: @sky;
+  border-top: 2px solid @sky;
+  padding: 0 10px;
+  margin-right: 10px;
+}
+#custom-notification.notification {
+  color: @green;
 }
