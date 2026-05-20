@@ -17,7 +17,7 @@ Geared more towared laptops.
 - [Fabric](https://wiki.ffpy.org) - Widget system in python. [Install](https://wiki.ffpy.org/getting-started/installation-guide/)
 - [awww](https://codeberg.org/LGFae/awww) - Wallpaper system. [Install: `cargo install awww awww-daemon --git https://codeberg.org/LGFae/awww.git`]
 - [Waybar](https://github.com/Alexays/Waybar) - status bar. [[Install](https://github.com/Alexays/Waybar/wiki/Installation)]
-- [Dunst](https://dunst-project.org) - Notification daemon to receive notifications. [Install](https://github.com/dunst-project/dunst?tab=readme-ov-file#installation)
+- ~~[Dunst](https://dunst-project.org)~~ [SwayNC](https://github.com/ErikReider/SwayNotificationCenter) - Notification daemon to receive notifications, view notification history and control panel. [Install](https://github.com/ErikReider/SwayNotificationCenter#install)
 - [tofi](https://github.com/philj56/tofi) - App launcher [Install](https://github.com/philj56/tofi)
 - [wofi](https://github.com/SimplyCEO/wofi) - Graphical menu [Install](https://github.com/SimplyCEO/wofi?tab=readme-ov-file#installing) (Also available on package manager)
 - [Kitty](https://sw.kovidgoyal.net/kitty/) - Terminal, simple as that. [Install from package manager]
