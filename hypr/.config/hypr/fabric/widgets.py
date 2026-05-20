@@ -49,7 +49,7 @@ class Menu(Window):
             name="system-menu",
             layer="top",
             anchor="top left",
-            margin="18px 0px 0px 18px",
+            margin="16px 0px 0px 16px",
             exclusivity="none",
             keyboard_mode="on-demand",
         )
@@ -61,7 +61,8 @@ class Menu(Window):
             "dolphin &",
             "kitty btop &",
             "plasma-discover &",
-            "kitty --class=rmpc rmpc &"
+            "kitty --class=rmpc rmpc &",
+            "gnome-calculator &"
         ]
         self.add(
             Box(
@@ -94,6 +95,7 @@ class Menu(Window):
                             Button(label="System Monitor", on_clicked=lambda: self._run(4)),
                             Button(label="Store",          on_clicked=lambda: self._run(5)),
                             Button(label="Music player",   on_clicked=lambda: self._run(6)),
+                            Button(label="Music player",   on_clicked=lambda: self._run(7)),
                             Box(style_classes = ["spacer"]),
                             Box(
                                 orientation="h",
@@ -195,7 +197,7 @@ class Resolution(Window):
             name="resolution-settings",
             layer="top",
             anchor="top right",
-            margin="18px 18px 0px 0px",
+            margin="16px 16px 0px 0px",
             exclusivity="none",
             keyboard_mode="on-demand",
         )
@@ -294,7 +296,7 @@ class Brightness(Window):
             name="brightness-settings",
             layer="top",
             anchor="top right",
-            margin="18px 18px 0px 0px",
+            margin="16px 16px 0px 0px",
             exclusivity="none",
             keyboard_mode="on-demand",
         )
@@ -393,7 +395,7 @@ class Notification(Window):
             name="notification-center",
             layer="top",
             anchor="top-right",
-            margin="18px 18px 0px 0px",
+            margin="16px 16px 0px 0px",
             exclusivity="none",
             v_expand=True,
             keyboard_mode="on-demand",
@@ -467,7 +469,7 @@ class Music(Window):
             name="music-center",
             layer="top",
             anchor="top-center",
-            margin="18px 0px 0px 0px",
+            margin="16px 0px 0px 0px",
             exclusivity="none",
             v_expand=True,
             keyboard_mode="on-demand",
