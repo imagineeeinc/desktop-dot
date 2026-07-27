@@ -8,9 +8,9 @@
   "layer-shell": true,
   "layer-shell-cover-screen": true,
   "cssPriority": "user",
-  "control-center-margin-top": 11,
-  "control-center-margin-bottom": 11,
-  "control-center-margin-right": 15,
+  "control-center-margin-top": 12,
+  "control-center-margin-bottom": 12,
+  "control-center-margin-right": 12,
   "control-center-margin-left": 0,
   "notification-2fa-action": true,
   "notification-inline-replies": false,
@@ -90,6 +90,13 @@
           "type": "toggle",
           "active": false,
           "command": ""
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "active": false,
+          "command": "swaync-client -d",
+          "update-command": "swaync-client -D"
         }
       ]
     },

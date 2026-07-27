@@ -503,7 +503,7 @@ notificationwindow, blankwindow {
 .widget-buttons-grid flowboxchild > button {
   border-radius: var(--border-radius);
   font-size: 1.5rem;
-  min-width: 1rem;
+  min-width: 0.6rem;
 }
 
 .widget-buttons-grid flowboxchild > button.toggle:checked {
