@@ -388,6 +388,7 @@ notificationwindow, blankwindow {
 /* Title widget */
 .widget-title {
   margin-bottom: 0;
+  padding-left: 10px;
   border-bottom: none;
   border-radius: 10px 10px 0 0;
 }
