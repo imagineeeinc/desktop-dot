@@ -39,9 +39,6 @@ music_playing = False
 music_playlist = 0
 music_playlist_pos = 0 
 
-notifications_json = json.loads(subprocess.run(["/usr/bin/dunstctl", "history"], stdout=subprocess.PIPE).stdout.decode("utf-8"))
-notifications = notifications_json["data"][0]
-
 class Menu(Window):
     def __init__(self, **kwargs):
         super().__init__(
@@ -388,80 +385,6 @@ class Brightness(Window):
                 os.system(f"ddcutil --display {disp_parts[len(disp_parts)-1]} setvcp 10 {int(brightness)-5}")
                 self.list.children[index].children[1].value = int(brightness)-5
 
-class Notification(Window):
-    def __init__(self, **kwargs):
-        super().__init__(
-            title="notification-center",
-            name="notification-center",
-            layer="top",
-            anchor="top-right",
-            margin="16px 16px 0px 0px",
-            exclusivity="none",
-            v_expand=True,
-            keyboard_mode="on-demand",
-        )
-        self.connect("key-press-event", self._on_key_press)
-        self.res_list=Box(
-            orientation="v",
-            spacing=10,
-        )
-        self.add(
-            Box(
-                name="main-box",
-                orientation="v",
-                spacing=10,
-                size=[500,500],
-                children=[
-                    Box(
-                        orientation="h",
-                        spacing=20,
-                        children=[
-                            Label("Notifications",style_classes=["font-large"]),
-                            DateTime(
-                                formatters="%I:%M:%S %p\n%A %d of %B %Y",
-                                h_align="end",
-                                name="time"
-                            )
-                        ]
-                    ),
-                    ScrolledWindow(
-                        min_content_size=[250, 300],
-                        size=[500,300],
-                        h_scrollbar_policy="never",
-                        v_expand=True,
-                        h_align="start",
-                        child=self.res_list,
-                    )
-                ]
-            )
-        )
-        self.visible = False
-        self.hide()
-        self.update()
-    def update(self):
-        global notifications
-        self.res_list.children = []
-        for notification in notifications:
-            self.res_list.add(
-                Box(
-                    orientation="v",
-                    spacing=10,
-                    children=[
-                        Label(
-                            notification["body"]["data"],
-                            max_chars_width=80,
-                            line_wrap="word",
-                            h_align="start"
-                        )
-                    ]
-                )
-            )
-
-    def _on_key_press(self, _, event):
-        if event.keyval == Gdk.KEY_Escape:
-            self.visible = False
-            self.hide()
-
 class Music(Window):
     def __init__(self, **kwargs):
         super().__init__(
@@ -550,7 +473,6 @@ class Music(Window):
             self.hide()
 
 global system_menu
-global notification_center
 global music_center
 
 def toggle_system_menu():
@@ -560,20 +482,6 @@ def toggle_system_menu():
     else:
         system_menu.show()
         system_menu.visible = True
-
-def toggle_notification_center():
-    global notification_center_vis
-    global notifications
-    global notifications_json
-    if notification_center.visible:
-        notification_center.hide()
-        notification_center.visible = False
-    else:
-        notifications_json = json.loads(subprocess.run(["/usr/bin/dunstctl", "history"], stdout=subprocess.PIPE).stdout.decode("utf-8"))
-        notifications = notifications_json["data"][0]
-        notification_center.update()
-        notification_center.show()
-        notification_center.visible = True
 
 def toggle_music_center():
     if music_center.visible:
@@ -588,7 +496,6 @@ if __name__ == "__main__":
     monitor_resolution = Resolution()
     monitor_brightness = Brightness()
     system_menu = Menu()
-    notification_center = Notification()
     music_center = Music()
 
     def on_monitors_changed(f, v):
@@ -654,7 +561,6 @@ if __name__ == "__main__":
     app.add_window(monitor_resolution)
     app.add_window(monitor_brightness)
     app.add_window(system_menu)
-    app.add_window(notification_center)
     app.add_window(music_center)
 
     app.set_stylesheet_from_file(os.path.dirname(os.path.realpath(__file__))+"/style.css")
