@@ -3,5 +3,5 @@ if pgrep -x "pavucontrol --tab 3" > /dev/null
 then
     pkill -x "pavucontrol"
 else
-    pavucontrol &
+    pavucontrol --tab 3 &
 fi
