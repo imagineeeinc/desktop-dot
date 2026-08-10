@@ -1,5 +1,5 @@
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("waybar & awww-daemon & hypridle & swaync")
+  hl.exec_cmd("quickshell & awww-daemon & hypridle & swaync & hyrpsunset -t 7000")
   hl.exec_cmd("kitten panel --edge=background -c ~/.config/kitty/bg.conf cava -p ~/.config/cava/bg-config") -- Cava background
   hl.exec_cmd("nwg-dock-hyprland -i 35 -nolauncher -hd 1000 -mb 20 -d") 
   hl.exec_cmd("/usr/libexec/pam_kwallet_init")
