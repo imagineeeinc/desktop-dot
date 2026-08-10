@@ -15,8 +15,9 @@ Geared more towared laptops.
   - ~~Hyprpaper~~ Deprecated, superseded by [awww](https://codeberg.org/LGFae/awww)
   - Hyprpolkitagent
 - [Fabric](https://wiki.ffpy.org) - Widget system in python. [Install](https://wiki.ffpy.org/getting-started/installation-guide/)
+- [Quickshell](https://quickshell.org) - Widget and shell system. [Install](https://quickshell.org/docs/v0.3.0/guide/install-setup/)
 - [awww](https://codeberg.org/LGFae/awww) - Wallpaper system. [Install: `cargo install awww awww-daemon --git https://codeberg.org/LGFae/awww.git`]
-- [Waybar](https://github.com/Alexays/Waybar) - status bar. [[Install](https://github.com/Alexays/Waybar/wiki/Installation)]
+- ~~[Waybar](https://github.com/Alexays/Waybar) - status bar. [[Install](https://github.com/Alexays/Waybar/wiki/Installation)]~~ Deprecated, superseded by [Quickshell](https://quickshell.org)
 - ~~[Dunst](https://dunst-project.org)~~ [SwayNC](https://github.com/ErikReider/SwayNotificationCenter) - Notification daemon to receive notifications, view notification history and control panel. [Install](https://github.com/ErikReider/SwayNotificationCenter#install)
 - [tofi](https://github.com/philj56/tofi) - App launcher [Install](https://github.com/philj56/tofi)
 - [wofi](https://github.com/SimplyCEO/wofi) - Graphical menu [Install](https://github.com/SimplyCEO/wofi?tab=readme-ov-file#installing) (Also available on package manager)
