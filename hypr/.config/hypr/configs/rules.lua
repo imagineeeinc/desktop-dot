@@ -8,7 +8,7 @@ hl.window_rule({match={class="kitty", float=true},border_size=0})
 hl.window_rule({match={title="Copying — Dolphin"}, move={"monitor_w - window_w - 23", "monitor_h - window_h - 23"}})
 hl.window_rule({match={class="wofi"}, border_size=0, no_shadow=true})
 hl.window_rule({match={title="Bitwarden - Vivaldi"}, float=true, size={500, 700}, move=top_right})
-hl.window_rule({match={class="rmpc"}, xray=true, float=true, border_size=0, no_shadow=true, size={"window_w * 0.75", "window_h * 0.75"}})
+hl.window_rule({match={class="rmpc"}, xray=true, float=true, border_size=0, no_shadow=true, size={"monitor_w * 0.75", "monitor_h * 0.75"}})
 hl.window_rule({match={class="Waydroid"}, float=true, fullscreen=true})
 
 hl.window_rule({match={class="Teddy|MateEngineX.x86_64"},border_size=0,no_shadow=true,no_blur=true})
