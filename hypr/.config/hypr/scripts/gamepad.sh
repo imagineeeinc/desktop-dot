@@ -26,7 +26,7 @@ count_real_joysticks() {
 }
 
 on_connected() {
-  op=$( echo -e "󰑈  Big Picture\n󰓓 Steam\n󱢾 Heroic\n Lutris\n Desktop" | wofi -i --dmenu --prompt "Select a gaming mode" )
+  op=$( echo -e "󰑈  Big Picture\n󰓓 Steam\n󱢾 Heroic\n Lutris\n Desktop\n Xbox" | wofi -i --dmenu --prompt "Select a gaming mode" )
   local choose="Desktop"
   local icon="stadia"
   case $op in
@@ -52,6 +52,10 @@ on_connected() {
     " Desktop")
       echo "Desktop mode"
       ;;
+    " Xbox")
+      xdg-open https://xbox.com/play
+      choose="Xbox"
+      ;;
   esac
   notify-send -a Gamepad -i $icon -n ~/.config/swaync/megastar.png "Gamepad connected" "Launching ${choose}"
 }
@@ -64,7 +68,7 @@ while true; do
     connected=true
   elif [ "$real_count" -eq 0 ] && [ "$connected" = true ]; then
     echo "Physical controller disconnected."
-    steam steam://close/bigpicture &
+    # steam steam://close/bigpicture &
     flatpak kill com.heroicgameslauncher.hgl &
     pkill lutris &
     notify-send -a Gamepad -i stadia -n ~/.config/swaync/megastar.png "Gamepad disconnected" "Closing game launchers"
