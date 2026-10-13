@@ -5,13 +5,12 @@ import QtQuick
 import QtQuick.Layouts
 
 PanelWindow {
-  id: powerProfiles
-  width: 225
-  implicitHeight: 181
   anchors.top: true
+  anchors.left: true
   anchors.right: true
-  margins.top: 17
-  margins.right: 17
+  anchors.bottom: true
+  margins.top: 16
+  id: powerProfiles
   color: "transparent"
   Behavior on implicitHeight {
     NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
@@ -51,6 +50,9 @@ PanelWindow {
     id: batteryMenuMouseArea
     anchors.fill: parent
     hoverEnabled: true
+    onClicked: {
+      powerProfiles.menuOpen = false;
+    }
     onEntered: {
       hideTimer.stop()
     }
@@ -110,7 +112,9 @@ PanelWindow {
     }
   }
   Rectangle {
-    anchors.fill: parent
+    width: 225
+    implicitHeight: 181
+    x: parent.width - 225 - 16
     radius: 10
     color: Qt.alpha(root.base, 0.5)
     border.width: 1
@@ -145,16 +149,15 @@ PanelWindow {
             anchors.leftMargin: 10
             spacing: 15
             Text {
-              text: isActive ? "✓" : icon
+              text: isActive ? "" : icon
               width: 8
               color: isActive ? root.teal : root.sapphire
-              font.pixelSize: root.fontSize
-              font.bold: true
+              font { family: root.fontFamily; pixelSize: root.fontSize; bold: true }
             }
             Text {
               text: title
               color: isActive ? root.teal : root.text
-              font.pixelSize: root.fontSize
+              font { family: root.fontFamily; pixelSize: root.fontSize }
             }
           }
           MouseArea {
