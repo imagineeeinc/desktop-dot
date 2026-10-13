@@ -92,20 +92,20 @@ PanelWindow {
       font { family: root.fontFamily; pixelSize: root.fontSize * 1.5; bold: true }
     }
     Text {
+      id: musicInfo
       x: cover.width + cover.x*2
       y: 35 + root.fontSize * 1.5
-      width: parent.width - (cover.width + cover.x*2) - extraInfo.width - 20
+      width: parent.width - (cover.width + cover.x*2)
       elide: Text.ElideRight
-      text: ` ${musicArtist} • 󰀥 ${musicAlbum}`
+      text: ` ${musicArtist}${musicAlbum ? " • 󰀥 " + musicAlbum : ""}`
       color: root.subtext0
       font { family: root.fontFamily; pixelSize: root.fontSize; bold: true }
     }
     Text {
       id: extraInfo
-      x: parent.width - width - 10
-      y: 35
-      text: `󰐵 ${musicBitrate}kbps\n󰐑 ${musicQueuePos}/${musicQueueLen} • ${musicRepeat ? "󰑖" : "󰑗"}`
-      horizontalAlignment: Text.AlignRight
+      x: cover.width + cover.x*2
+      y: musicInfo.y + musicInfo.height
+      text: `󰐵 ${musicBitrate}kbps • 󰐑 ${musicQueuePos}/${musicQueueLen} • ${musicRepeat ? "󰑖" : "󰑗"}`
       color: root.overlay0
       font { family: root.fontFamily; pixelSize: root.fontSize; bold: true }
     }
