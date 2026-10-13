@@ -115,5 +115,17 @@
       "expand-button-label": "",
       "collapse-button-label": ""
     }
+  },
+  "notification-visibility": {
+    "whatsapp-kdeconnect": {
+      "state": "ignored",
+      "desktop-entry": "org\\.kde\\.kdeconnect",
+      "summary": ".*WhatsApp.*"
+    },
+    "discord-kdeconnect": {
+      "state": "ignored",
+      "desktop-entry": "org\\.kde\\.kdeconnect",
+      "summary": ".*(Discord|Discorb).*"
+    }
   }
 }
