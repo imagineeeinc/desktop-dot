@@ -75,8 +75,8 @@ hl.bind("ALT+mouse:276", hl.dsp.send_shortcut({ mods="", key="CTRL+tab", window=
 hl.bind("ALT+mouse:275", hl.dsp.send_shortcut({ mods="", key="CTRL+SHIFT+tab", window=browser })) -- Send ctrl+shift+tab to browser
 
 -- Music
-hl.bind("code:201", hl.dsp.exec_cmd("mpc toggle"), { locked = true, ignore_mods = true}) -- Toggle playing of music from mpd
-hl.bind(super("N"), hl.dsp.exec_cmd("python -m fabric execute Widgets \"toggle_music_center()\" -j")) -- Open music center
+hl.bind("SUPER_L+code:201", hl.dsp.exec_cmd("mpc toggle"), { locked = true }) -- Toggle playing of music from mpd
+hl.bind(super("N"), hl.dsp.exec_cmd("quickshell ipc call musicCenter invertVisible")) -- Open music center
 hl.bind(super("SHIFT+N"), hl.dsp.exec_cmd("kitty --class=rmpc rmpc")) -- Open rmpc
 
 -- Misc
@@ -97,6 +97,8 @@ hl.bind(super("equal"), hl.dsp.window.move({ workspace = 12 }))
 -- Switch workspace
 hl.bind(super("tab"), hl.dsp.focus({ workspace = "r+1" })) -- Go forward a workspace
 hl.bind(super("SHIFT+tab"), hl.dsp.focus({ workspace = "r-1" })) -- Go backward a workspace
+hl.bind(super("CTRL+tab"), hl.dsp.focus({ workspace = "r+1" })) -- Go forward a workspace
+hl.bind(super("CTRL+SHIFT+tab"), hl.dsp.focus({ workspace = "r-1" })) -- Go backward a workspace
 hl.bind(super("mouse:276"), hl.dsp.focus({ workspace = "r+1" })) -- Go forward a workspace
 hl.bind(super("mouse:275"), hl.dsp.focus({ workspace = "r-1" })) -- Go backward a workspace
 

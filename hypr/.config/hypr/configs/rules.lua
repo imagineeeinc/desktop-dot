@@ -9,8 +9,8 @@ hl.window_rule({match={title="Copying — Dolphin"}, move={"monitor_w - window_w
 hl.window_rule({match={class="wofi"}, border_size=0, no_shadow=true})
 hl.window_rule({match={title="Bitwarden - Vivaldi"}, float=true, size={500, 700}, move=top_right})
 hl.window_rule({match={class="rmpc"}, xray=true, float=true, border_size=0, no_shadow=true, size={"monitor_w * 0.75", "monitor_h * 0.75"}})
-hl.window_rule({match={class="Waydroid"}, float=true, fullscreen=true})
 
+hl.window_rule({match={class="Waydroid"}, float=true, fullscreen=true})
 hl.window_rule({match={class="Teddy|MateEngineX.x86_64"},border_size=0,no_shadow=true,no_blur=true})
 hl.window_rule({match={title="Friends List"}, float=true, size={"monitor_w/2-15", "monitor_h-80"}, move={15, 63}})
 hl.window_rule({match={title="Picture in picture"}, float=true})
@@ -19,13 +19,14 @@ hl.window_rule({match={class="org.gnome.Calculator"}, float=true, size={700, 620
 hl.window_rule({match={class=panels}, float=true, border_size=0, size={650, 550}, move=top_right, no_shadow=true, pin=true})
 hl.window_rule({match={class="org.wails.netbird"}, border_size=0, size={650, 550}, move=top_right, no_shadow=true, pin=true})
 hl.window_rule({match={class="wifitui"}, float=true, border_size=0, size={500, "monitor_h - 83"}, move=top_right, no_shadow=true, pin=true})
+hl.window_rule({match={class="openlogi-action-ring"}, float=true, border_size=0, no_blur=true, no_shadow=true, confine_pointer=true, move={"cursor_x-(window_w/2)", "cursor_y-(window_h/2)"}})
 
 hl.window_rule({match={class="fusion360.exe"}, opaque=false, no_blur=true})
 
 -- Layer rules
 hl.layer_rule({
   match = {
-    namespace = "waybar|quickshell|nwg-dock|wofi|launcher|top|logout_dialog|resolution-settings|brightness-settings|monitor-settings|system-menu|music-center|swaync-control-center|swaync-notification-window|nm-sidebar"
+    namespace = "hyprshutdown|waybar|quickshell|nwg-dock|wofi|launcher|top|logout_dialog|resolution-settings|brightness-settings|monitor-settings|system-menu|music-center|swaync-control-center|swaync-notification-window|nm-sidebar"
   },
   ignore_alpha = false,
   blur = true

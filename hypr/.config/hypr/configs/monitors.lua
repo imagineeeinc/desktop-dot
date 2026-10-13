@@ -23,7 +23,7 @@ hl.monitor({
   output = "desc:Invalid Vendor Codename - RTK HG556J03 0x01010101",
   mode = "1920x1080@60",
   position = "auto-right",
-  scale = 1.2,
+  scale = 1,
   bitdepth = 16,
   cm = "auto"
 })
