@@ -41,10 +41,29 @@ Scope {
   property int memUsage: 0
   property int temprature: 0
   property int gpuUsage: 0
+
   property int noNoti: 0
   property bool dnd: false
+
   property string curPowerProfile: "balanced"
+
+  property string musicState: "Paused"
+  property bool musicMute: false
+  property int musicDuration: 0
+  property int musicElapsed: 0
+  property int musicBitrate: 128
+  property int musicQueueLen: 0
+  property int musicQueuePos: 0
+  property bool musicRepeat: false
+  property string musicTitle: ""
+  property string musicAlbum: ""
+  property string musicArtist: ""
+  property string lastMusicFile: ""
+  property string musicFile: ""
+  property string musicCoverFile: ""
+
   property int brightness: 100
+
   property var lastCpuIdle: 0
   property var lastCpuTotal: 0
   Process {
@@ -57,7 +76,9 @@ Scope {
   PowerMenu {
     id: powerMenu
   }
-
+  MusicPlayer {
+    id: musicCenter
+  }
   Process {
     id: cpuProc
     command: ["sh", "-c", "head -1 /proc/stat"]
@@ -158,6 +179,44 @@ Scope {
     }
     Component.onCompleted: running = true
   }
+  Process {
+    id: musicStatusUpdate
+    command: ["sh", "-c", "rmpc status"]
+    stdout: SplitParser {
+      onRead: data => {
+        var json = JSON.parse(data)
+        musicState = json.state
+        //musicMute = json.mute
+        musicDuration = parseInt(json.duration.secs)
+        musicElapsed = parseInt(json.elapsed.secs)
+        musicBitrate = parseInt(json.bitrate)
+        musicQueuePos = parseInt(json.song)
+        musicQueueLen = parseInt(json.playlistlength)
+        musicRepeat = json.repeat
+      }
+    }
+    Component.onCompleted: running = true
+  }
+  Process {
+    id: musicInfoUpdate
+    command: ["sh", "-c", "rmpc song"]
+    stdout: SplitParser {
+      onRead: data => {
+        var json = JSON.parse(data)
+        musicTitle = json.metadata.title
+        musicAlbum = json.metadata.album ? json.metadata.album : ""
+        musicArtist = json.metadata.artist ? json.metadata.artist : ""
+        musicFile = json.file
+        if (musicFile != lastMusicFile) {
+          commandRunner.command = ["sh", "-c", `[ ! -e "/tmp/${musicTitle}_cover.jpg" ] && mpc readpicture "${musicFile}" > "/tmp/${musicTitle}_cover.jpg"`]
+          commandRunner.running = true
+          musicCoverFile = `/tmp/${musicTitle}_cover.jpg`
+          lastMusicFile = musicFile
+        }
+      }
+    }
+    Component.onCompleted: running = true
+  }
   Timer {
     interval: 2000
     running: true
@@ -177,6 +236,8 @@ Scope {
     repeat: true
     onTriggered: {
       backlightUpdate.running = true
+      musicInfoUpdate.running = true
+      musicStatusUpdate.running = true
     }
   }
 }
